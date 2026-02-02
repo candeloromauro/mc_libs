@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mc-libs"
+version = "0.1.0"
+description = "Personal mc_* utility libraries"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.scripts]
+mc-libs = "mc_cli:main"
+
+[tool.setuptools]
+packages = [
+  "mc_robo_utils",
+  "mc_data_utils",
+  "mc_io_utils",
+  "mc_geomap_utils",
+  "mc_libs_index",
+  "mc_cli",
+]
