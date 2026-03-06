@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from typing import Iterable
 
 from mc_libs_index import (
     list_all,
@@ -16,7 +17,7 @@ from mc_libs_index import (
     get_example,
     list_cli_commands,
 )
-from mc_io_utils.lcm import scan_channels, list_channel_fields_in_dir
+from mc_io_utils.lcm import scan_channels, list_channel_fields_in_dir, lcmlog_to_pickle
 
 
 def main() -> int:
@@ -37,43 +38,53 @@ def main() -> int:
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     tree_cmd = sub.add_parser("tree", help="Show full library tree")
-    tree_cmd.add_argument("--json", action="store_true", help="Output JSON instead of text")
+    tree_cmd.add_argument("--json", action="store_true", help="Output JSON instead of text")            
     tree_alias = sub.add_parser("list-all", help="Alias for tree (full library tree)")
-    tree_alias.add_argument("--json", action="store_true", help="Output JSON instead of text")
+    tree_alias.add_argument("--json", action="store_true", help="Output JSON instead of text")          # mc-libs tree [--json] || mc-libs list-all [--json]
 
     libs_cmd = sub.add_parser("libs", help="List libraries")
-    libs_cmd.add_argument("--json", action="store_true", help="Output JSON instead of text")
+    libs_cmd.add_argument("--json", action="store_true", help="Output JSON instead of text")             
     libs_alias = sub.add_parser("list-libraries", help="Alias for libs")
-    libs_alias.add_argument("--json", action="store_true", help="Output JSON instead of text")
+    libs_alias.add_argument("--json", action="store_true", help="Output JSON instead of text")          # mc-libs libs [--json] || mc-libs list-libraries [--json]
 
     funcs = sub.add_parser("funcs", help="List functions for a library")
-    funcs.add_argument("library", help="Library name, e.g. mc_data_utils")
-    funcs.add_argument("--json", action="store_true", help="Output JSON instead of text")
-    funcs_alias = sub.add_parser("list-functions", help="Alias for funcs")
-    funcs_alias.add_argument("library", help="Library name, e.g. mc_data_utils")
-    funcs_alias.add_argument("--json", action="store_true", help="Output JSON instead of text")
+    funcs.add_argument("library", help="Library name, e.g. mc_data_utils")                              
+    funcs.add_argument("--json", action="store_true", help="Output JSON instead of text")               
+    funcs_alias = sub.add_parser("list-functions", help="Alias for funcs")                              
+    funcs_alias.add_argument("library", help="Library name, e.g. mc_data_utils")                        
+    funcs_alias.add_argument("--json", action="store_true", help="Output JSON instead of text")         # mc-libs funcs [library] [--json] || mc-libs list-functions [library] [--json]
 
     examples = sub.add_parser("examples", help="List examples for a library")
-    examples.add_argument("library", help="Library name, e.g. mc_data_utils")
-    examples.add_argument("--json", action="store_true", help="Output JSON instead of text")
+    examples.add_argument("library", help="Library name, e.g. mc_data_utils")                           
+    examples.add_argument("--json", action="store_true", help="Output JSON instead of text")            # mc-libs examples [library] [--json]
 
-    cli_cmd = sub.add_parser("cli", help="List mc-libs CLI commands and targets")
+    cli_cmd = sub.add_parser("cli", help="List mc-libs CLI commands and targets")                       # mc-libs cli [--json]
     cli_cmd.add_argument("--json", action="store_true", help="Output JSON instead of text")
 
-    help_cmd = sub.add_parser("help", help="Show docstring for a function/class")
-    help_cmd.add_argument("path", help="Fully qualified name, e.g. mc_data_utils.allan2")
+    help_cmd = sub.add_parser("help", help="Show docstring for a function/class")                       
+    help_cmd.add_argument("path", help="Fully qualified name, e.g. mc_data_utils.allan2")               # mc-libs help [path]
 
-    ex_cmd = sub.add_parser("example", help="Show example for a function/class")
-    ex_cmd.add_argument("path", help="Fully qualified name, e.g. mc_data_utils.allan2")
+    ex_cmd = sub.add_parser("example", help="Show example for a function/class")                        
+    ex_cmd.add_argument("path", help="Fully qualified name, e.g. mc_data_utils.allan2")                 # mc-libs example [path]           
 
-    channels = sub.add_parser("channels", help="List channels in an LCM log")
+    channels = sub.add_parser("channels", help="List channels in an LCM log")                           
     channels.add_argument("folder", help="Folder containing LCM logs")
-    channels.add_argument("pattern", nargs="?", default="*.00", help="Glob pattern (default: *.00)")
+    channels.add_argument("pattern", nargs="?", default="*.00", help="Glob pattern (default: *.00)")    # mc-libs channels [folder] [pattern]
 
     fields = sub.add_parser("fields", help="List fields for a channel in an LCM log")
     fields.add_argument("folder", help="Folder containing LCM logs")
     fields.add_argument("pattern", nargs="?", default="*.00", help="Glob pattern (default: *.00)")
-    fields.add_argument("channel", help="Channel name, e.g. IMU_KEARFOTT_COMPAS")
+    fields.add_argument("channel", help="Channel name, e.g. IMU_KEARFOTT_COMPAS")                       # mc-libs fields [folder] [pattern] [channel]
+
+    convert = sub.add_parser("convert", help="Convert LCM logs to a merged output file")
+    convert.add_argument("folder", help="Folder containing LCM logs")
+    convert.add_argument("pattern", nargs="?", default="*.00", help="Glob pattern (default: *.00)")
+    convert.add_argument("--channels", nargs="*", default=None, help="Optional list of channels to include")
+    convert.add_argument("--out", default="lcmlogs/lcmlogs_merged.pkl", help="Output path")
+    convert.add_argument("--format", choices=["pickle", "pkl"], default="pickle", help="Output format (default: pickle)")
+    convert.add_argument("--lcm-packages", nargs="*", default=None, help="Optional LCM python packages")
+    convert.add_argument("--quiet", action="store_true", help="Disable verbose log parsing output")     # mc-libs convert [folder] [pattern] [--channels channels, don't use it for all channels] [--out filepath] [--format pickle] [--lcm-packages optional packages(ex. compas_lcmtypes oi)] [--quiet]
+
 
     args = parser.parse_args()
 
@@ -137,15 +148,31 @@ def main() -> int:
         if lcmtype:
             print(f"lcmtype: {lcmtype}")
         fields_list = result.get("fields", [])
-        if fields_list:
-            print("fields:")
-            for field in fields_list:
-                print(f"  - {field}")
+        if isinstance(fields_list, Iterable) and not isinstance(fields_list, (str, bytes, bytearray)):
+            fields_list = list(fields_list)
+            if fields_list:
+                print("fields:")
+                for field in fields_list:
+                    print(f"  - {field}")
         header_fields = result.get("header_fields")
-        if header_fields:
-            print("header fields:")
-            for field in header_fields:
-                print(f"  - {field}")
+        if isinstance(header_fields, Iterable) and not isinstance(header_fields, (str, bytes, bytearray)):
+            header_fields = list(header_fields)
+            if header_fields:
+                print("header fields:")
+                for field in header_fields:
+                    print(f"  - {field}")
+        return 0
+    if args.cmd == "convert":
+        out_path = lcmlog_to_pickle(
+            args.folder,
+            file_pattern=args.pattern,
+            channels=args.channels,
+            out_path=args.out,
+            lcm_packages=args.lcm_packages,
+            format=args.format,
+            verbose=not args.quiet,
+        )
+        print(f"Saved merged pickle to {out_path}")
         return 0
 
     return 1

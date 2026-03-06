@@ -363,6 +363,7 @@ def list_cli_commands() -> str:
         ("example <fully.qualified.path>", "mc_libs_index.get_example"),
         ("channels <folder> [pattern]", "mc_io_utils.lcm.scan_channels"),
         ("fields <folder> [pattern] <channel>", "mc_io_utils.lcm.list_channel_fields_in_dir"),
+        ("convert <folder> [pattern] [--channels ...] [--out PATH] [--format pickle|pkl] [--lcm-packages ...]", "mc_io_utils.lcm.lcmlog_to_pickle"),
         ("cli [--json]", "mc_libs_index.list_cli_commands"),
     ]
     lines: List[str] = ["mc-libs (usage -> target)"]

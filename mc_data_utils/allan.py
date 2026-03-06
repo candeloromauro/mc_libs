@@ -43,13 +43,15 @@ def allan2(omega: np.ndarray, fs: float, pts: int) -> Tuple[np.ndarray, np.ndarr
     if N < 3:
         raise ValueError("allan2 requires at least 3 samples")
 
-    n = 2 ** np.arange(0, int(np.floor(np.log2(N / 2))) + 1)
-    maxN = int(n[-1])
-    end_log_inc = np.log10(maxN)
-    m = np.unique(np.ceil(np.logspace(0, end_log_inc, pts))).astype(int)
+    # Logaritmic x axis
+    n = 2 ** np.arange(0, int(np.floor(np.log2(N / 2))) + 1)                # powers of two going up to last elements
+    maxN = int(n[-1])                                                       # max power of two including all elements of input array
+    end_log_inc = np.log10(maxN)                                            # corresponding log10
+    m = np.unique(np.ceil(np.logspace(0, end_log_inc, pts))).astype(int)    # integer array of pts log-spaced windows between 0 and maxN
     t0 = 1.0 / fs
     T = m * t0
-    theta = np.cumsum(omega, axis=0) / fs
+
+    theta = np.cumsum(omega, axis=0) / fs           # integration over time: omega / fs = (theta/dt) / (1/dt) = theta. CUMSUM: cumulative sum over time
     sigma2 = np.zeros((len(T), M))
 
     for i, mi in enumerate(m):

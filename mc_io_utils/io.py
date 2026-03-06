@@ -3,6 +3,7 @@
 Functions:
 - list_files(folder, pattern="*", recursive=False)
 - load_points(file_path, mode=...)
+- load_csv_timeseries_to_mc_kinematics(file_path, columns, ...)
 - save_points(file_path, points)
 - load_grd(...)
 - write_geotiff(...)
@@ -14,8 +15,10 @@ Example:
 
 from __future__ import annotations
 
+import csv
+from datetime import datetime
 from pathlib import Path
-from typing import Any, List
+from typing import Any, Dict, List, Optional, Sequence
 from enum import Enum
 
 import numpy as np
@@ -36,6 +39,164 @@ class PointFileMode(str, Enum):
 
 # Prefixed alias for mc_* libraries.
 McPointFileMode = PointFileMode
+
+
+_KIN_FIELDS = {"x", "y", "z", "psi", "theta", "phi"}
+_KIN_GROUPS = {"pos", "vel", "acc"}
+_KIN_FRAMES = {"ned", "body"}
+
+
+def _parse_datetime_value(value: str, datetime_format: str | None) -> datetime:
+    if datetime_format:
+        return datetime.strptime(value, datetime_format)
+    return datetime.fromisoformat(value)
+
+
+def _parse_kinematics_key(spec: str) -> tuple[str, str, str] | None:
+    parts = [p.strip() for p in spec.split(".") if p.strip()]
+    if len(parts) == 2:
+        frame = "body"
+        group, field = parts
+    elif len(parts) == 3:
+        frame, group, field = parts
+    else:
+        return None
+
+    if frame not in _KIN_FRAMES or group not in _KIN_GROUPS or field not in _KIN_FIELDS:
+        return None
+    return frame, group, field
+
+
+def load_csv_timeseries_to_mc_kinematics(
+    file_path: Path | str,
+    columns: Sequence[str],
+    *,
+    delimiter: str = ",",
+    has_header: bool = False,
+    skip_rows: int = 0,
+    datetime_format: str | None = None,
+    units: Optional[Dict[str, str]] = None,
+):
+    """Load a CSV timeseries and map columns into ``McKinematicsData``.
+
+    Args:
+        file_path (Path | str): CSV file path.
+        columns (Sequence[str]): ordered mapping for CSV columns (left-to-right), e.g.
+            ``["t_s", "body.pos.phi", "body.pos.theta", "body.pos.psi"]``.
+            Supported aliases for ignored columns: ``""``, ``"_"``, ``"-"``, ``"ignore"``.
+            Supported kinematics keys: ``<frame>.<group>.<field>`` with
+            ``frame in {ned, body}``, ``group in {pos, vel, acc}``, and
+            ``field in {x, y, z, psi, theta, phi}``.
+            A 2-part key like ``pos.x`` defaults to frame ``body``.
+        delimiter (str): CSV delimiter (default: ``,``,).
+        has_header (bool): whether to skip one header row.
+        skip_rows (int): additional rows to skip after optional header.
+        datetime_format (str | None): ``strptime`` format for ``t_datetime`` values.
+            If omitted, ISO-8601 parsing is used.
+        units (Optional[Dict[str, str]]): optional unit overrides merged into default units.
+
+    Returns:
+        McKinematicsData: populated kinematics structure.
+
+    Raises:
+        ValueError: If column mapping is invalid or CSV rows are malformed.
+        KeyError: If neither ``t_s`` nor ``t_datetime`` is provided.
+
+    Examples:
+        >>> from mc_io_utils.io import load_csv_timeseries_to_mc_kinematics
+        >>> data = load_csv_timeseries_to_mc_kinematics(
+        ...     "imu.csv",
+        ...     columns=["t_s", "body.pos.phi", "body.pos.theta", "body.pos.psi"],
+        ... )
+    """
+    from mc_robo_utils import McKinematicsData, McKinematicFrame, build_component, default_units
+
+    path = Path(file_path)
+    if not path.is_file():
+        raise FileNotFoundError(f"CSV file not found: {path}")
+    if not columns:
+        raise ValueError("columns must not be empty")
+
+    raw_rows: List[List[str]] = []
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.reader(handle, delimiter=delimiter)
+        for row in reader:
+            if not row or all(cell.strip() == "" for cell in row):
+                continue
+            raw_rows.append(row)
+
+    if has_header and raw_rows:
+        raw_rows = raw_rows[1:]
+    if skip_rows > 0:
+        raw_rows = raw_rows[skip_rows:]
+    if not raw_rows:
+        raise ValueError(f"No data rows found in {path}")
+
+    expected_cols = len(columns)
+    for idx, row in enumerate(raw_rows, start=1):
+        if len(row) < expected_cols:
+            raise ValueError(
+                f"Row {idx} has {len(row)} columns but {expected_cols} are required by columns mapping"
+            )
+
+    values_by_spec: Dict[str, List[str]] = {}
+    for row in raw_rows:
+        for col_idx, spec in enumerate(columns):
+            spec_clean = spec.strip()
+            if spec_clean in {"", "_", "-", "ignore"}:
+                continue
+            values_by_spec.setdefault(spec_clean, []).append(row[col_idx].strip())
+
+    t_datetime = None
+    if "t_datetime" in values_by_spec:
+        t_datetime = [_parse_datetime_value(v, datetime_format) for v in values_by_spec["t_datetime"]]
+
+    if "t_s" in values_by_spec:
+        t_s = np.asarray([float(v) for v in values_by_spec["t_s"]], dtype=float)
+    elif t_datetime is not None:
+        t0 = t_datetime[0]
+        t_s = np.asarray([(dt - t0).total_seconds() for dt in t_datetime], dtype=float)
+    else:
+        raise KeyError("columns must include 't_s' or 't_datetime'")
+
+    data_map: Dict[str, Dict[str, Dict[str, np.ndarray]]] = {
+        "ned": {"pos": {}, "vel": {}, "acc": {}},
+        "body": {"pos": {}, "vel": {}, "acc": {}},
+    }
+
+    for spec, values in values_by_spec.items():
+        parsed = _parse_kinematics_key(spec)
+        if parsed is None:
+            continue
+        frame, group, field = parsed
+        try:
+            arr = np.asarray([float(v) for v in values], dtype=float)
+        except ValueError as exc:
+            raise ValueError(f"Non-numeric value found in column '{spec}'") from exc
+        data_map[frame][group][field] = arr
+
+    ned_frame = McKinematicFrame(
+        pos=build_component(**data_map["ned"]["pos"]),
+        vel=build_component(**data_map["ned"]["vel"]),
+        acc=build_component(**data_map["ned"]["acc"]),
+    )
+    body_frame = McKinematicFrame(
+        pos=build_component(**data_map["body"]["pos"]),
+        vel=build_component(**data_map["body"]["vel"]),
+        acc=build_component(**data_map["body"]["acc"]),
+    )
+
+    merged_units = default_units()
+    if units:
+        merged_units.update(units)
+
+    return McKinematicsData(
+        t_s=t_s,
+        t_datetime=t_datetime,
+        ned=ned_frame,
+        body=body_frame,
+        units=merged_units,
+    )
 
 
 def load_points(file_path: Path, *, mode: PointFileMode | str = PointFileMode.VERTICAL) -> NDArray[np.float64]:

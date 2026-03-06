@@ -4,6 +4,7 @@ Functions:
 - plot_component(...)
 - plot_multiple(...)
 - plot_series(x, y, title=None, x_label="time", y_label=None, height=400)
+- plot_multi_series(series, title=None)
 - plot_allan(T_g, sigma_g, T_a, sigma_a, labels=None, colors=None)
 - save_html(fig, path, open_after=False)
 
@@ -18,6 +19,7 @@ from __future__ import annotations
 from typing import Iterable, Optional, Sequence, Any
 
 import numpy as np
+from numpy.typing import ArrayLike
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -35,6 +37,24 @@ def _get_component(frame: McKinematicFrame, group: str) -> McKinematicComponent:
 
 def _get_time(data: McKinematicsData) -> Sequence:
     return data.t_datetime if data.t_datetime is not None else data.t_s
+
+
+def _x_bounds(x: Sequence | np.ndarray) -> tuple[object, object] | None:
+    if len(x) == 0:
+        return None
+    x0 = x[0]
+    x1 = x[-1]
+    if x0 == x1:
+        return None
+    return (x0, x1)
+
+
+def _ylabel_for(group: str, field: str, units: dict[str, str]) -> str | None:
+    key = f"{group}.{field}"
+    unit = units.get(key)
+    if unit:
+        return f"{field} [{unit}]"
+    return field
 
 
 def plot_component(
@@ -74,6 +94,7 @@ def plot_component(
         raise ValueError("No fields available to plot")
 
     t = _get_time(data)
+    xr = _x_bounds(t)
 
     if separate_axes:
         fig = make_subplots(rows=len(fields), cols=1, shared_xaxes=True, subplot_titles=fields)
@@ -82,8 +103,11 @@ def plot_component(
             if y is None:
                 continue
             fig.add_trace(go.Scatter(x=t, y=y, mode="lines", name=f"{frame}.{group}.{f}"), row=idx, col=1)
+            fig.update_yaxes(title_text=_ylabel_for(group, f, data.units), row=idx, col=1)
         fig.update_layout(height=250 * len(fields))
         fig.update_xaxes(title_text="time", row=len(fields), col=1)
+        if xr is not None:
+            fig.update_xaxes(range=[xr[0], xr[1]])
     else:
         fig = go.Figure()
         for f in fields:
@@ -93,6 +117,8 @@ def plot_component(
             fig.add_trace(go.Scatter(x=t, y=y, mode="lines", name=f"{frame}.{group}.{f}"))
         fig.update_layout(height=600)
         fig.update_xaxes(title_text="time")
+        if xr is not None:
+            fig.update_xaxes(range=[xr[0], xr[1]])
 
     fig.update_layout(title=title or f"{frame.upper()} {group.upper()}")
     return fig
@@ -127,6 +153,7 @@ def plot_multiple(
         raise ValueError("specs must not be empty")
 
     t = _get_time(data)
+    xr = _x_bounds(t)
 
     total_rows = 0
     for frame, group, fields in specs:
@@ -149,6 +176,7 @@ def plot_multiple(
                 if y is None:
                     continue
                 fig.add_trace(go.Scatter(x=t, y=y, mode="lines", name=f"{frame}.{group}.{f}"), row=row, col=1)
+                fig.update_yaxes(title_text=_ylabel_for(group, f, data.units), row=row, col=1)
                 row += 1
         else:
             for f in fields:
@@ -160,6 +188,8 @@ def plot_multiple(
 
     fig.update_layout(title=title or "Kinematics", height=250 * total_rows)
     fig.update_xaxes(title_text="time", row=total_rows, col=1)
+    if xr is not None:
+        fig.update_xaxes(range=[xr[0], xr[1]])
     return fig
 
 
@@ -192,6 +222,55 @@ def plot_series(
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=x, y=y, mode="lines"))
     fig.update_layout(title=title, xaxis_title=x_label, yaxis_title=y_label, height=height)
+    xr = _x_bounds(x)
+    if xr is not None:
+        fig.update_xaxes(range=[xr[0], xr[1]])
+    return fig
+
+
+def plot_multi_series(
+    series: Iterable[tuple[Sequence[Any], ArrayLike, str, str | None]],
+    *,
+    title: str | None = None,
+    height_per: int = 250,
+) -> go.Figure:
+    """Plot multiple labeled series as stacked Plotly subplots.
+
+    Args:
+        series (Iterable[tuple[Sequence[Any], ArrayLike, str, str | None]]):
+            iterable of ``(x, y, label, y_label)`` tuples.
+        title (str | None): optional figure title.
+        height_per (int): height in pixels allocated per subplot.
+
+    Returns:
+        go.Figure: Plotly figure containing one subplot per provided series.
+
+    Raises:
+        ValueError: If ``series`` is empty.
+
+    Examples:
+        >>> from mc_robo_utils.plotting import plot_multi_series
+        >>> fig = plot_multi_series([
+        ...     ([0, 1, 2], [0.0, 1.0, 0.0], "signal_a", "amp"),
+        ...     ([0, 1, 2], [2.0, 2.5, 2.3], "signal_b", "deg"),
+        ... ])
+    """
+    series = list(series)
+    if not series:
+        raise ValueError("series must not be empty")
+
+    fig = make_subplots(rows=len(series), cols=1, shared_xaxes=True, subplot_titles=[s[2] for s in series])
+    for idx, (x, y, label, y_label) in enumerate(series, start=1):
+        fig.add_trace(go.Scatter(x=x, y=y, mode="lines", name=label), row=idx, col=1)
+        if y_label:
+            fig.update_yaxes(title_text=y_label, row=idx, col=1)
+
+    fig.update_layout(title=title, height=height_per * len(series))
+    fig.update_xaxes(title_text="time", row=len(series), col=1)
+    if len(series[0][0]) > 1:
+        x0, x1 = series[0][0][0], series[0][0][-1]
+        if x0 != x1:
+            fig.update_xaxes(range=[x0, x1])
     return fig
 
 

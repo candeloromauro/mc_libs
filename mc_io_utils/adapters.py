@@ -71,4 +71,14 @@ def from_imu_kearfott_compas(imu: Dict) -> McKinematicsData:
         acc=build_component(x=accel[:, 0], y=accel[:, 1], z=accel[:, 2]),
     )
 
-    return McKinematicsData(t_s=t_s, t_datetime=t_datetime, body=body, units=default_units())
+    # For this IMU channel, body.vel.* contains angular rates (rad/s), not linear velocity.
+    units = default_units()
+    units.update(
+        {
+            "vel.x": "rad/s",
+            "vel.y": "rad/s",
+            "vel.z": "rad/s",
+        }
+    )
+
+    return McKinematicsData(t_s=t_s, t_datetime=t_datetime, body=body, units=units)

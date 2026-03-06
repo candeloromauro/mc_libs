@@ -20,4 +20,5 @@ packages = [
   "mc_geomap_utils",
   "mc_libs_index",
   "mc_cli",
+  "mc_reporting_utils",
 ]

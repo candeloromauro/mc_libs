@@ -1,0 +1,4892 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{TreeLevelZero}{HTML}{1E1E1E}
+\definecolor{TreeLevelOne}{HTML}{1F5C99}
+\definecolor{TreeLevelTwo}{HTML}{0F7B6C}
+\definecolor{TreeLevelThree}{HTML}{8A3FA0}
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  columns=fullflexible
+}
+\title{mc\_libs Comprehensive Library Guide}
+\date{Generated on 2026-03-04 15:44:50}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+This document is generated from source modules and docstrings under the mc\_libs repository.
+
+\section{Packages Overview}
+\begin{itemize}
+\item \texttt{mc\_cli}
+\item \texttt{mc\_data\_utils}
+\item \texttt{mc\_geomap\_utils}
+\item \texttt{mc\_io\_utils}
+\item \texttt{mc\_libs\_index}
+\item \texttt{mc\_reporting\_utils}
+\item \texttt{mc\_robo\_utils}
+\end{itemize}
+
+\section{Library Tree}
+\begingroup
+\ttfamily
+\textcolor{TreeLevelZero}{mc\_libs}\\
+\textcolor{TreeLevelOne}{|- mc\_cli}\\
+\textcolor{TreeLevelTwo}{|  `- mc\_cli}\\
+\textcolor{TreeLevelThree}{|     `- main}\\
+\textcolor{TreeLevelOne}{|- mc\_data\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_data\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_data\_utils.allan}\\
+\textcolor{TreeLevelThree}{|  |  `- allan2}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_data\_utils.allan\_metrics}\\
+\textcolor{TreeLevelThree}{|  |  `- extract\_allan\_metrics}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_data\_utils.metrics}\\
+\textcolor{TreeLevelThree}{|  |  |- first\_local\_min}\\
+\textcolor{TreeLevelThree}{|  |  `- nearest\_index}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_data\_utils.signal}\\
+\textcolor{TreeLevelThree}{|  |  `- estimate\_period}\\
+\textcolor{TreeLevelTwo}{|  `- mc\_data\_utils.time}\\
+\textcolor{TreeLevelThree}{|     |- time\_window\_mask\_from\_hm}\\
+\textcolor{TreeLevelThree}{|     |- time\_window\_mask\_from\_indexes}\\
+\textcolor{TreeLevelThree}{|     `- time\_window\_mask\_from\_seconds}\\
+\textcolor{TreeLevelOne}{|- mc\_geomap\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.evaluation}\\
+\textcolor{TreeLevelThree}{|  |  |- array\_stats}\\
+\textcolor{TreeLevelThree}{|  |  |- export\_feature\_stats\_table}\\
+\textcolor{TreeLevelThree}{|  |  |- export\_label\_table}\\
+\textcolor{TreeLevelThree}{|  |  `- print\_array\_stats}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.io}\\
+\textcolor{TreeLevelThree}{|  |  |- PointFileMode}\\
+\textcolor{TreeLevelThree}{|  |  |- load\_grd}\\
+\textcolor{TreeLevelThree}{|  |  |- load\_points}\\
+\textcolor{TreeLevelThree}{|  |  |- save\_points}\\
+\textcolor{TreeLevelThree}{|  |  `- write\_geotiff}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.macroregions}\\
+\textcolor{TreeLevelThree}{|  |  |- UF.find}\\
+\textcolor{TreeLevelThree}{|  |  |- UF.union}\\
+\textcolor{TreeLevelThree}{|  |  |- absorb\_small\_islands}\\
+\textcolor{TreeLevelThree}{|  |  |- axial\_mean\_heading}\\
+\textcolor{TreeLevelThree}{|  |  |- classify\_policy\_cells}\\
+\textcolor{TreeLevelThree}{|  |  |- edge\_list\_with\_boundaries}\\
+\textcolor{TreeLevelThree}{|  |  |- eroded\_support\_mask}\\
+\textcolor{TreeLevelThree}{|  |  |- export\_regions\_csv}\\
+\textcolor{TreeLevelThree}{|  |  |- grad\_mag\_deg}\\
+\textcolor{TreeLevelThree}{|  |  |- policy\_for\_class}\\
+\textcolor{TreeLevelThree}{|  |  |- policy\_mode\_filter}\\
+\textcolor{TreeLevelThree}{|  |  |- policy\_superpixel\_consensus}\\
+\textcolor{TreeLevelThree}{|  |  |- rag\_merge\_slic}\\
+\textcolor{TreeLevelThree}{|  |  |- smooth\_macro\_labels}\\
+\textcolor{TreeLevelThree}{|  |  |- summarize\_regions}\\
+\textcolor{TreeLevelThree}{|  |  `- superpixel\_stats}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.manipulation}\\
+\textcolor{TreeLevelThree}{|  |  |- Mode}\\
+\textcolor{TreeLevelThree}{|  |  |- grid\_to\_point\_cloud}\\
+\textcolor{TreeLevelThree}{|  |  `- shift\_point\_cloud}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.planning}\\
+\textcolor{TreeLevelThree}{|  |  |- attach\_altitude\_and\_tilt}\\
+\textcolor{TreeLevelThree}{|  |  |- estimate\_turn\_count}\\
+\textcolor{TreeLevelThree}{|  |  |- generate\_serpentine\_tracks}\\
+\textcolor{TreeLevelThree}{|  |  |- generate\_serpentine\_tracks\_polygon}\\
+\textcolor{TreeLevelThree}{|  |  |- merge\_tracks\_continuous}\\
+\textcolor{TreeLevelThree}{|  |  |- polyline\_length\_m}\\
+\textcolor{TreeLevelThree}{|  |  |- region\_mask}\\
+\textcolor{TreeLevelThree}{|  |  |- simplify\_polyline\_rdp}\\
+\textcolor{TreeLevelThree}{|  |  |- smooth\_polyline}\\
+\textcolor{TreeLevelThree}{|  |  |- straighten\_tracks}\\
+\textcolor{TreeLevelThree}{|  |  `- tracks\_total\_length\_m}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.plotting}\\
+\textcolor{TreeLevelThree}{|  |  |- PlotDataSource.from\_input}\\
+\textcolor{TreeLevelThree}{|  |  |- PlotDataSource.iter\_xy\_pairs}\\
+\textcolor{TreeLevelThree}{|  |  |- make\_quicklook\_figures}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_dem}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_dem\_with\_policy\_overlay}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_dem\_with\_polygon}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_feature\_map}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_knoll\_diagnostics}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_knoll\_ellipses\_3d}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_labels}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_macro\_labels\_3d\_interactive}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_macro\_overlay}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_macro\_tracks\_overlay}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_macro\_with\_seeds}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_mesh}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_point\_cloud}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_policy\_map}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_primitives\_3d}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_primitives\_3d\_interactive}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_primitives\_overlay}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_region\_headings}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_tracks\_3d\_interactive}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_tracks\_overlay}\\
+\textcolor{TreeLevelThree}{|  |  |- plot\_tracks\_overlay\_by\_region}\\
+\textcolor{TreeLevelThree}{|  |  |- save\_mosaic}\\
+\textcolor{TreeLevelThree}{|  |  |- save\_mosaic\_1x2}\\
+\textcolor{TreeLevelThree}{|  |  `- show\_plot}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.pointcloud}\\
+\textcolor{TreeLevelThree}{|  |  |- delaunay\_mesh}\\
+\textcolor{TreeLevelThree}{|  |  |- delaunay\_to\_open3d\_mesh}\\
+\textcolor{TreeLevelThree}{|  |  |- dem\_to\_features}\\
+\textcolor{TreeLevelThree}{|  |  |- feature\_to\_slic\_segmentation}\\
+\textcolor{TreeLevelThree}{|  |  |- grid\_to\_dem}\\
+\textcolor{TreeLevelThree}{|  |  `- mesh\_to\_obj}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_geomap\_utils.primitives}\\
+\textcolor{TreeLevelThree}{|  |  |- Knoll}\\
+\textcolor{TreeLevelThree}{|  |  |- augment\_regions\_with\_primitives}\\
+\textcolor{TreeLevelThree}{|  |  |- detect\_knolls}\\
+\textcolor{TreeLevelThree}{|  |  `- detect\_knolls\_plane\_descent}\\
+\textcolor{TreeLevelTwo}{|  `- mc\_geomap\_utils.spiral}\\
+\textcolor{TreeLevelThree}{|     |- archimedean\_spiral}\\
+\textcolor{TreeLevelThree}{|     `- clip\_polyline\_to\_mask}\\
+\textcolor{TreeLevelOne}{|- mc\_io\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_io\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_io\_utils.adapters}\\
+\textcolor{TreeLevelThree}{|  |  `- from\_imu\_kearfott\_compas}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_io\_utils.io}\\
+\textcolor{TreeLevelThree}{|  |  |- PointFileMode}\\
+\textcolor{TreeLevelThree}{|  |  |- list\_files}\\
+\textcolor{TreeLevelThree}{|  |  |- load\_csv\_timeseries\_to\_mc\_kinematics}\\
+\textcolor{TreeLevelThree}{|  |  |- load\_grd}\\
+\textcolor{TreeLevelThree}{|  |  |- load\_points}\\
+\textcolor{TreeLevelThree}{|  |  |- save\_points}\\
+\textcolor{TreeLevelThree}{|  |  `- write\_geotiff}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_io\_utils.lcm}\\
+\textcolor{TreeLevelThree}{|  |  |- ChannelTimingStats.add\_event}\\
+\textcolor{TreeLevelThree}{|  |  |- FileScanStats}\\
+\textcolor{TreeLevelThree}{|  |  |- LCMScanStats}\\
+\textcolor{TreeLevelThree}{|  |  |- SyncAgeStats.observe}\\
+\textcolor{TreeLevelThree}{|  |  |- lcmlog\_to\_pickle}\\
+\textcolor{TreeLevelThree}{|  |  |- list\_channel\_fields}\\
+\textcolor{TreeLevelThree}{|  |  |- list\_channel\_fields\_in\_dir}\\
+\textcolor{TreeLevelThree}{|  |  |- main}\\
+\textcolor{TreeLevelThree}{|  |  |- scan\_channels}\\
+\textcolor{TreeLevelThree}{|  |  `- scan\_logs\_detailed}\\
+\textcolor{TreeLevelTwo}{|  `- mc\_io\_utils.runtime}\\
+\textcolor{TreeLevelThree}{|     |- check\_output\_file}\\
+\textcolor{TreeLevelThree}{|     |- clear\_console}\\
+\textcolor{TreeLevelThree}{|     |- estimate\_total\_bytes}\\
+\textcolor{TreeLevelThree}{|     |- setup\_logging\_from\_yaml}\\
+\textcolor{TreeLevelThree}{|     `- sum\_total\_bytes}\\
+\textcolor{TreeLevelOne}{|- mc\_libs\_index}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_libs\_index}\\
+\textcolor{TreeLevelThree}{|  |  `- list\_cli\_commands}\\
+\textcolor{TreeLevelTwo}{|  `- mc\_libs\_index.index}\\
+\textcolor{TreeLevelThree}{|     |- build\_registry}\\
+\textcolor{TreeLevelThree}{|     |- discover\_libraries}\\
+\textcolor{TreeLevelThree}{|     |- get\_example}\\
+\textcolor{TreeLevelThree}{|     |- get\_help}\\
+\textcolor{TreeLevelThree}{|     |- list\_all}\\
+\textcolor{TreeLevelThree}{|     |- list\_all\_auto}\\
+\textcolor{TreeLevelThree}{|     |- list\_cli\_commands}\\
+\textcolor{TreeLevelThree}{|     |- list\_examples}\\
+\textcolor{TreeLevelThree}{|     |- list\_functions}\\
+\textcolor{TreeLevelThree}{|     |- list\_libraries}\\
+\textcolor{TreeLevelThree}{|     |- print\_tree}\\
+\textcolor{TreeLevelThree}{|     `- tree}\\
+\textcolor{TreeLevelOne}{|- mc\_reporting\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_reporting\_utils}\\
+\textcolor{TreeLevelTwo}{|  |- mc\_reporting\_utils.formatting}\\
+\textcolor{TreeLevelThree}{|  |  |- format\_bytes\_human}\\
+\textcolor{TreeLevelThree}{|  |  |- format\_duration\_us}\\
+\textcolor{TreeLevelThree}{|  |  |- format\_mean\_ms}\\
+\textcolor{TreeLevelThree}{|  |  `- format\_timestamp\_utc\_us}\\
+\textcolor{TreeLevelTwo}{|  `- mc\_reporting\_utils.terminal}\\
+\textcolor{TreeLevelThree}{|     |- Spinner.start}\\
+\textcolor{TreeLevelThree}{|     `- Spinner.stop}\\
+\textcolor{TreeLevelOne}{`- mc\_robo\_utils}\\
+\textcolor{TreeLevelTwo}{   |- mc\_robo\_utils}\\
+\textcolor{TreeLevelTwo}{   |- mc\_robo\_utils.kinematics}\\
+\textcolor{TreeLevelThree}{   |  |- KinematicComponent.as\_dict}\\
+\textcolor{TreeLevelThree}{   |  |- KinematicFrame}\\
+\textcolor{TreeLevelThree}{   |  |- KinematicsData.copy}\\
+\textcolor{TreeLevelThree}{   |  |- build\_component}\\
+\textcolor{TreeLevelThree}{   |  `- default\_units}\\
+\textcolor{TreeLevelTwo}{   |- mc\_robo\_utils.plotting}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_allan}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_component}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_multi\_series}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_multiple}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_series}\\
+\textcolor{TreeLevelThree}{   |  `- save\_html}\\
+\textcolor{TreeLevelTwo}{   |- mc\_robo\_utils.plotting\_print}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_allan\_mpl}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_multi\_series\_mpl}\\
+\textcolor{TreeLevelThree}{   |  |- plot\_multiple\_mpl}\\
+\textcolor{TreeLevelThree}{   |  `- plot\_series\_mpl}\\
+\textcolor{TreeLevelTwo}{   `- mc\_robo\_utils.transformations}\\
+\textcolor{TreeLevelThree}{      `- quat\_to\_rpy}\\
+\endgroup
+
+\section{Package \texttt{mc\_cli}}
+\subsection{Module \texttt{mc\_cli}}
+CLI for mc\_* libraries.
+
+\subsubsection{Function \texttt{main}}
+Entry point for the ``mc-libs`` CLI.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_cli import main
+main() -> int
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: exit code (0 for success).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_cli import main
+>>> isinstance(main(), int)
+True
+\end{lstlisting}
+
+
+\section{Package \texttt{mc\_data\_utils}}
+\subsection{Module \texttt{mc\_data\_utils}}
+General data utilities.
+
+Exports:
+- allan2
+- estimate\_period
+- first\_local\_min, nearest\_index
+- extract\_allan\_metrics
+- time\_window\_mask\_from\_hm, time\_window\_mask\_from\_indexes, time\_window\_mask\_from\_seconds
+
+No public functions or classes were found in this module.
+
+\subsection{Module \texttt{mc\_data\_utils.allan}}
+Allan variance/deviation utilities.
+
+Functions:
+- allan2(omega, fs, pts)
+
+\subsubsection{Function \texttt{allan2}}
+Compute Allan deviation (sigma) using log-spaced cluster sizes.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.allan import allan2
+allan2(omega: np.ndarray, fs: float, pts: int) -> Tuple[np.ndarray, np.ndarray]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+omega (np.ndarray): Rate sequence shaped ``(N,)`` or ``(N, M)``, where ``M`` is the
+    number of axes.
+fs (float): Sample rate in Hz.
+pts (int): Number of log-spaced cluster sizes (tau points) to evaluate.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Tuple[np.ndarray, np.ndarray]: ``T`` (tau values in seconds) and ``sigma`` with
+shape ``(len(T), M)`` containing Allan deviation per axis.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If fewer than 3 samples are provided.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_data_utils.allan import allan2
+>>> omega = np.random.randn(1000)
+>>> T, sigma = allan2(omega, fs=100.0, pts=50)
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_data\_utils.allan\_metrics}}
+Allan deviation metric extraction helpers.
+
+Functions:
+- extract\_allan\_metrics(T, sigma, ...)
+
+\subsubsection{Function \texttt{extract\_allan\_metrics}}
+Extract Allan-derived metrics per axis.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.allan_metrics import extract_allan_metrics
+extract_allan_metrics(
+    T: np.ndarray,
+    sigma: np.ndarray,
+    *,
+    kind: str = "gyro_deg_per_hr",
+    min_points: int = 8,
+    slope_tol: float = 0.12,
+    bias_slope_tol: float = 0.08,
+    bias_divisor: float = 0.664,
+) -> Dict[str, Dict[str, float]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+T (np.ndarray): averaging times (tau) in seconds, shape ``(K,)``.
+sigma (np.ndarray): Allan deviation array, shape ``(K, M)`` (or ``(K,)``).
+    Units must match the input to ``allan2``. For example:
+    - ``kind="gyro_deg_per_hr"`` expects ``sigma`` in deg/hr.
+    - ``kind="accel_mg"`` expects ``sigma`` in mG.
+kind (str): conversion convention. Supported values:
+    - ``"gyro_deg_per_hr"`` -> ARW [deg/sqrthr], RRW [deg/hr/sqrthr], BS [deg/hr]
+    - ``"accel_mg"`` -> VRW [mG/sqrthr], BRW [mG/sqrthr], BS [mG]
+    The input Allan curve is fit in tau seconds; coefficients are converted
+    to per-``sqrt(hr)`` style metrics commonly reported in datasheets.
+min_points (int): minimum number of points for slope segment fits.
+slope_tol (float): tolerance for slope matching when finding white/RW segments.
+bias_slope_tol (float): reserved tolerance for bias estimation (kept for API compatibility).
+bias_divisor (float): divisor for bias instability extraction (default 0.664).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, Dict[str, float]]: metrics per axis key (``"X"``, ``"Y"``, ``"Z"``). Each
+axis dict includes ``white_coeff``, ``rw_coeff``, ``bs``, and diagnostic tau ranges.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``T`` and ``sigma`` lengths are inconsistent.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_data_utils.allan_metrics import extract_allan_metrics
+>>> T = np.logspace(0, 3, 50)
+>>> sigma = np.random.rand(50, 3)
+>>> metrics = extract_allan_metrics(T, sigma, kind="gyro_deg_per_hr")
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_data\_utils.metrics}}
+Small metric helpers.
+
+Functions:
+- first\_local\_min(x)
+- nearest\_index(x, target)
+
+\subsubsection{Function \texttt{first\_local\_min}}
+Return index of first local minimum; fallback to last index.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.metrics import first_local_min
+first_local_min(x: np.ndarray) -> int
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+x (np.ndarray): 1-D array to scan.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: index of the first local minimum, or the last index if none found.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_data_utils.metrics import first_local_min
+>>> first_local_min(np.array([3.0, 2.0, 4.0, 1.0]))
+1
+\end{lstlisting}
+
+\subsubsection{Function \texttt{nearest\_index}}
+Return index of element in x closest to target.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.metrics import nearest_index
+nearest_index(x: np.ndarray, target: float) -> int
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+x (np.ndarray): 1-D array of candidate values.
+target (float): target value to match.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: index of the nearest value in ``x``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_data_utils.metrics import nearest_index
+>>> nearest_index(np.array([0.0, 2.0, 5.0]), 3.1)
+2
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_data\_utils.signal}}
+Signal analysis utilities.
+
+Functions:
+- estimate\_period(t, y)
+
+\subsubsection{Function \texttt{estimate\_period}}
+Estimate dominant period using FFT; returns period in seconds.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.signal import estimate_period
+estimate_period(t: np.ndarray, y: np.ndarray) -> float
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+t (np.ndarray): time stamps (seconds).
+y (np.ndarray): signal samples aligned with ``t``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+float: estimated dominant period in seconds (``nan`` if insufficient data).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_data_utils.signal import estimate_period
+>>> t = np.linspace(0, 10, 500)
+>>> y = np.sin(2 * np.pi * t)
+>>> round(estimate_period(t, y), 2)
+1.0
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_data\_utils.time}}
+Time-window utilities.
+
+Functions:
+- time\_window\_mask\_from\_hm(t\_dt, start\_hm=None, end\_hm=None)
+- time\_window\_mask\_from\_indexes(n, start\_idx=None, end\_idx=None)
+- time\_window\_mask\_from\_seconds(t\_s, start\_s=None, end\_s=None)
+
+\subsubsection{Function \texttt{time\_window\_mask\_from\_hm}}
+Return a boolean mask for a HH:MM time window on datetime series.
+
+If end <= start, the window is assumed to wrap into the next day.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.time import time_window_mask_from_hm
+time_window_mask_from_hm(
+    t_dt: list[datetime], start_hm: str | None, end_hm: str | None
+) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+t_dt (list[datetime]): datetime samples to filter.
+start_hm (str | None): start time in ``HH:MM`` format (local time).
+end_hm (str | None): end time in ``HH:MM`` format (local time).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: boolean mask aligned to ``t_dt``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from datetime import datetime
+>>> from mc_data_utils.time import time_window_mask_from_hm
+>>> t = [datetime(2024, 1, 1, 8, 0), datetime(2024, 1, 1, 9, 0)]
+>>> time_window_mask_from_hm(t, "08:30", "09:30").tolist()
+[False, True]
+\end{lstlisting}
+
+\subsubsection{Function \texttt{time\_window\_mask\_from\_indexes}}
+Return a boolean mask for a slice by index range.
+
+start\_idx/end\_idx are inclusive bounds. If None, defaults to start/end.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.time import time_window_mask_from_indexes
+time_window_mask_from_indexes(
+    n: int, start_idx: int | None = None, end_idx: int | None = None
+) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+n (int): length of the sequence to mask.
+start_idx (int | None): inclusive start index (default 0).
+end_idx (int | None): inclusive end index (default ``n - 1``).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: boolean mask of length ``n``.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``n`` is negative or indices are negative.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_data_utils.time import time_window_mask_from_indexes
+>>> time_window_mask_from_indexes(5, start_idx=1, end_idx=3).tolist()
+[False, True, True, True, False]
+\end{lstlisting}
+
+\subsubsection{Function \texttt{time\_window\_mask\_from\_seconds}}
+Return a boolean mask for a time window based on seconds array.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_data_utils.time import time_window_mask_from_seconds
+time_window_mask_from_seconds(
+    t_s: np.ndarray, start_s: float | None = None, end_s: float | None = None
+) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+t_s (np.ndarray): time vector in seconds.
+start_s (float | None): start time (defaults to first element).
+end_s (float | None): end time (defaults to last element).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: boolean mask aligned to ``t_s``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_data_utils.time import time_window_mask_from_seconds
+>>> t = np.array([0.0, 1.0, 2.0, 3.0])
+>>> time_window_mask_from_seconds(t, 1.0, 2.0).tolist()
+[False, True, True, False]
+\end{lstlisting}
+
+
+\section{Package \texttt{mc\_geomap\_utils}}
+\subsection{Module \texttt{mc\_geomap\_utils}}
+Reusable utilities for point-cloud processing and visualization.
+
+No public functions or classes were found in this module.
+
+\subsection{Module \texttt{mc\_geomap\_utils.evaluation}}
+No description provided.
+
+\subsubsection{Function \texttt{array\_stats}}
+Summarise the finite values of a raster with key statistics.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.evaluation import array_stats
+array_stats(arr: np.ndarray) -> dict[str, float]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+arr (np.ndarray): array from which to compute summary statistics.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict[str, float]: dictionary containing counts, percentiles, and extrema.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.evaluation import array_stats
+>>> stats = array_stats(np.array([1.0, 2.0, np.nan]))
+>>> stats["valid_px"]
+2.0
+\end{lstlisting}
+
+\subsubsection{Function \texttt{print\_array\_stats}}
+Pretty-print summary statistics produced by ``array\_stats``.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.evaluation import print_array_stats
+print_array_stats(arr: np.ndarray, name: str) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+arr (np.ndarray): array to analyse.
+name (str): label used in the console output.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.evaluation import print_array_stats
+>>> print_array_stats(np.array([1.0, 2.0, np.nan]), "demo")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{export\_label\_table}}
+Write CSV with per-label pixel counts and area in square metres.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.evaluation import export_label_table
+export_label_table(labels: np.ndarray, cell: float, path: Path | str) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): integer label raster to summarise.
+cell (float): cell size used to convert pixel counts to area.
+path (Path | str): destination CSV file path.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.evaluation import export_label_table
+>>> export_label_table(np.array([[0, 1], [1, 2]]), 0.5, "labels.csv")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{export\_feature\_stats\_table}}
+Serialise feature statistics to CSV using ``array\_stats``.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.evaluation import export_feature_stats_table
+export_feature_stats_table(features: dict[str, np.ndarray], path: Path | str) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+features (dict[str, np.ndarray]): mapping of feature name to raster.
+path (Path | str): destination CSV file path.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.evaluation import export_feature_stats_table
+>>> export_feature_stats_table({"slope": np.array([[1.0, np.nan]])}, "features.csv")
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_geomap\_utils.io}}
+No description provided.
+
+\subsubsection{Function \texttt{load\_points}}
+Load a whitespace-delimited point cloud into a NumPy array.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.io import load_points
+load_points(file_path: Path, *, mode: PointFileMode | str = PointFileMode.VERTICAL) -> NDArray[np.float64]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path): absolute path to the source XYZ text file.
+mode (PointFileMode | str): "vertical" for one point per line, "horizontal" for per-axis rows.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+NDArray[np.float64]: array with columns ``x, y, z`` describing each point.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the file contents are malformed or incompatible with the chosen layout.
+FileNotFoundError: If ``file_path`` does not exist.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> from mc_geomap_utils.io import load_points
+>>> pts = load_points(Path("points.xyz"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{save\_points}}
+Persist a point cloud next to the original file with a ``*\_cleaned`` suffix.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.io import save_points
+save_points(file_path: Path, points: np.ndarray) -> Path
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path): original input file whose directory will host the cleaned copy.
+points (np.ndarray): coordinates to be written (shape N x 3).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Path: filesystem path of the generated ``*_cleaned.txt`` file.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> import numpy as np
+>>> from mc_geomap_utils.io import save_points
+>>> out_path = save_points(Path("points.xyz"), np.zeros((3, 3)))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{load\_grd}}
+Load a GMT/NetCDF ``.grd`` file and return its raster plus metadata.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.io import load_grd
+load_grd(
+    file_path: Path | str,
+    *,
+    assume_wgs84: bool = True,
+) -> tuple[np.ndarray, Any, Any | None]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path | str): path to the grid file on disk.
+assume_wgs84 (bool): inject ``EPSG:4326`` when the dataset lacks a CRS.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+tuple[np.ndarray, Any, Any | None]: data array, affine transform, and CRS (if present).
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+FileNotFoundError: If the grid file does not exist.
+RuntimeError: If ``rasterio`` is unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.io import load_grd
+>>> data, transform, crs = load_grd("surface.grd")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{write\_geotiff}}
+Persist a NumPy array as a single-band GeoTIFF (with .npy fallback).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.io import write_geotiff
+write_geotiff(
+    path: Path | str,
+    arr: np.ndarray,
+    transform: Any,
+    *,
+    crs: str | None = None,
+    nodata: float | None = np.nan,
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+path (Path | str): destination file path for the raster.
+arr (np.ndarray): image data to be written.
+transform (Any): affine transform describing pixel-to-world mapping.
+crs (str | None): coordinate reference system identifier.
+nodata (float | None): value representing no-data cells.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.io import write_geotiff
+>>> write_geotiff("out.tif", np.zeros((10, 10)), transform=None)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{PointFileMode}}
+Layout of coordinates inside a plain-text point cloud file.
+
+No public methods were found.
+
+\subsection{Module \texttt{mc\_geomap\_utils.macroregions}}
+No description provided.
+
+\subsubsection{Function \texttt{eroded\_support\_mask}}
+Erode valid-data support by N cells to hide edge seams.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import eroded_support_mask
+eroded_support_mask(dem: np.ndarray, border: int = 3) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster with NaNs for no-data.
+border (int): number of cells to erode inward.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: boolean mask of the eroded valid-data support.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import eroded_support_mask
+>>> mask = eroded_support_mask(np.array([[1.0, np.nan], [2.0, 3.0]]), border=1)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{classify\_policy\_cells}}
+Classify each cell into a policy class based on slope/VRM/BPI.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import classify_policy_cells
+classify_policy_cells(features: dict[str, np.ndarray],
+                        slope_flat_deg: float = 5.0,
+                        slope_steep_deg: float = 15.0,
+                        vrm_steep: float = 0.06,
+                        bpi_sigma: float | None = None,
+                        bpi_sigma_mult: float = 1.0,
+                        ridge_min_slope_deg: float = 3.0,   # NEW
+                        vrm_min_slope_deg: float = 7.0      # NEW
+                        ) -> tuple[np.ndarray, float]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+features (dict[str, np.ndarray]): feature rasters including ``slope``, ``vrm``, and ``bpi``.
+slope_flat_deg (float): upper slope limit for flat class.
+slope_steep_deg (float): lower slope limit for steep class.
+vrm_steep (float): VRM threshold for steep classification.
+bpi_sigma (float | None): override for BPI sigma (otherwise estimated).
+bpi_sigma_mult (float): multiplier for BPI sigma thresholding.
+ridge_min_slope_deg (float): minimum slope for ridge/valley class.
+vrm_min_slope_deg (float): minimum slope for VRM-driven steep class.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+tuple[np.ndarray, float]: ``policy_map`` and computed ``sigma_bpi``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import classify_policy_cells
+>>> feats = {"slope": np.zeros((5, 5)), "vrm": np.zeros((5, 5)), "bpi": np.zeros((5, 5))}
+>>> policy, sigma_bpi = classify_policy_cells(feats)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{grad\_mag\_deg}}
+Compute gradient magnitude of the slope surface in degrees.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import grad_mag_deg
+grad_mag_deg(slope_deg: np.ndarray) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+slope_deg (np.ndarray): slope raster expressed in degrees.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: gradient magnitude at each cell.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import grad_mag_deg
+>>> grad = grad_mag_deg(np.zeros((3, 3)))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{edge\_list\_with\_boundaries}}
+Collect boundary pixel coordinates for each touching superpixel pair.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import edge_list_with_boundaries
+edge_list_with_boundaries(labels: np.ndarray) -> dict[tuple[int,int], list[tuple[int,int]]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): label raster describing superpixels.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict[tuple[int,int], list[tuple[int,int]]]: map from region pairs to seam coordinates.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import edge_list_with_boundaries
+>>> edges = edge_list_with_boundaries(np.array([[1, 1], [2, 2]]))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{superpixel\_stats}}
+Summarise each superpixel with area, class, and mean features.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import superpixel_stats
+superpixel_stats(labels: np.ndarray, policy_map: np.ndarray,
+                    feats: dict[str, np.ndarray]) -> dict[int, dict]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): superpixel label raster.
+policy_map (np.ndarray): class map aligned to the labels.
+feats (dict[str, np.ndarray]): feature rasters used for statistics.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict[int, dict]: mapping from region id to collected attributes.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import superpixel_stats
+>>> labels = np.array([[1, 1], [2, 2]])
+>>> policy = np.array([[1, 1], [2, 2]])
+>>> feats = {"slope": np.zeros((2, 2)), "vrm": np.zeros((2, 2)), "bpi": np.zeros((2, 2))}
+>>> stats = superpixel_stats(labels, policy, feats)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{rag\_merge\_slic}}
+Merge adjacent superpixels when classes agree and the boundary is weak.
+
+Boundary strength gamma\_ij is the mean |nabla(slope)| along the interface. Thresholds are
+class-wise percentiles; if a class has no edges, the global percentile is used.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import rag_merge_slic
+rag_merge_slic(labels: np.ndarray,
+                    policy_map: np.ndarray,
+                    feats: dict[str, np.ndarray],
+                    area_cap_px: int = 40000,
+                    tau_pct: float = 98.0,
+                    min_area_px: int = 0) -> tuple[np.ndarray, dict[int, int]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): SLIC superpixel label raster.
+policy_map (np.ndarray): per-cell policy classes aligned to ``labels``.
+feats (dict[str, np.ndarray]): feature rasters (expects ``"slope"``).
+area_cap_px (int): maximum area for merged regions (pixels).
+tau_pct (float): percentile used for boundary strength thresholds.
+min_area_px (int): minimum area for macroregions (smaller ones are absorbed).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+tuple[np.ndarray, dict[int, int]]: macro label raster and mapping from macro id to class.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import rag_merge_slic
+>>> labels = np.array([[1, 1], [2, 2]])
+>>> policy = np.array([[1, 1], [2, 2]])
+>>> feats = {"slope": np.zeros((2, 2))}
+>>> macro, reg_cls = rag_merge_slic(labels, policy, feats)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{axial\_mean\_heading}}
+Compute the dominant heading within a region using slope/aspect weights.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import axial_mean_heading
+axial_mean_heading(mask: np.ndarray, aspect: np.ndarray, slope: np.ndarray, along: bool) -> float
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+mask (np.ndarray): boolean mask describing the macroregion.
+aspect (np.ndarray): aspect raster measured in radians.
+slope (np.ndarray): slope raster measured in radians.
+along (bool): whether to align headings with the slope direction.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+float: heading angle expressed in radians.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import axial_mean_heading
+>>> mask = np.ones((2, 2), dtype=bool)
+>>> aspect = np.zeros((2, 2))
+>>> slope = np.zeros((2, 2))
+>>> axial_mean_heading(mask, aspect, slope, along=False)
+0.0
+\end{lstlisting}
+
+\subsubsection{Function \texttt{policy\_for\_class}}
+Derive default survey policy parameters for a macroregion class.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import policy_for_class
+policy_for_class(cls: int, W: float, h0: float, hmin: float, betamax_deg: float, mean_slope_deg: float)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+cls (int): policy class identifier.
+W (float): nominal swath width.
+h0 (float): baseline altitude parameter.
+hmin (float): minimum altitude permitted.
+betamax_deg (float): upper bound for pitch/heading offsets.
+mean_slope_deg (float): mean slope in degrees for the region.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict: dictionary containing spacing, altitude, and orientation flags.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.macroregions import policy_for_class
+>>> policy_for_class(1, W=3.0, h0=5.0, hmin=2.0, betamax_deg=20.0, mean_slope_deg=4.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{policy\_superpixel\_consensus}}
+Within each SLIC superpixel, if one class occupies >=min\_frac, assign the whole superpixel to it.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import policy_superpixel_consensus
+policy_superpixel_consensus(policy: np.ndarray, labels: np.ndarray, min_frac: float = 0.60) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+policy (np.ndarray): per-cell policy class raster.
+labels (np.ndarray): superpixel labels aligned to ``policy``.
+min_frac (float): minimum fraction for consensus assignment.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: updated policy raster with superpixel consensus applied.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import policy_superpixel_consensus
+>>> policy = np.array([[1, 1], [0, 2]])
+>>> labels = np.array([[1, 1], [1, 2]])
+>>> out = policy_superpixel_consensus(policy, labels, min_frac=0.5)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{policy\_mode\_filter}}
+Mode filter on nonzero classes to remove salt-and-pepper noise.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import policy_mode_filter
+policy_mode_filter(policy: np.ndarray, size: int = 3) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+policy (np.ndarray): policy class raster.
+size (int): neighborhood size (square window).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: filtered policy raster.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import policy_mode_filter
+>>> out = policy_mode_filter(np.array([[1, 0], [2, 2]]), size=3)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{summarize\_regions}}
+Compile region-wise metrics and recommended survey policies.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import summarize_regions
+summarize_regions(macro: np.ndarray, 
+                    reg_cls: dict[int,int],
+                    feats: dict[str,np.ndarray],
+                    W: float,
+                    h0: float,
+                    hmin: float,
+                    betamax_deg: float,
+                    cell_m: float) -> list[dict]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+macro (np.ndarray): macroregion label raster.
+reg_cls (dict[int, int]): mapping from macro id to policy class.
+feats (dict[str, np.ndarray]): feature rasters used for stats.
+W (float): nominal swath width.
+h0 (float): baseline altitude parameter.
+hmin (float): minimum altitude permitted.
+betamax_deg (float): maximum allowed heading offset.
+cell_m (float): raster cell size in metres.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+list[dict]: per-region policy summary rows.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import summarize_regions
+>>> macro = np.array([[1, 1], [2, 2]])
+>>> reg_cls = {1: 1, 2: 2}
+>>> feats = {"slope": np.zeros((2, 2)), "aspect": np.zeros((2, 2)), "vrm": np.zeros((2, 2)), "bpi": np.zeros((2, 2))}
+>>> rows = summarize_regions(macro, reg_cls, feats, W=3.0, h0=5.0, hmin=2.0, betamax_deg=20.0, cell_m=1.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{export\_regions\_csv}}
+Write macroregion summaries to CSV.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import export_regions_csv
+export_regions_csv(rows: list[dict], path) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+rows (list[dict]): list of per-region policy records.
+path (str | Path): destination CSV path.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.macroregions import export_regions_csv
+>>> export_regions_csv([{"id": 1, "cls": 1}], "regions.csv")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{absorb\_small\_islands}}
+Replace very small regions with their most common neighboring label.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import absorb_small_islands
+absorb_small_islands(labels: np.ndarray, min_area_px: int) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): macroregion label raster.
+min_area_px (int): regions with area < min_area_px are absorbed.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: relabeled raster.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import absorb_small_islands
+>>> labels = np.array([[1, 1], [1, 2]])
+>>> absorb_small_islands(labels, min_area_px=2)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{smooth\_macro\_labels}}
+Morphologically smooth jagged macro boundaries (closing+opening per region).
+
+Regions are processed in descending area so larger regions keep priority when overlaps occur.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.macroregions import smooth_macro_labels
+smooth_macro_labels(labels: np.ndarray, radius_px: int = 2) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): macroregion label raster.
+radius_px (int): structuring element radius in pixels.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: smoothed macroregion labels.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.macroregions import smooth_macro_labels
+>>> smooth_macro_labels(np.array([[1, 1], [1, 2]]), radius_px=1)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{UF}}
+Lightweight union-find structure for merging region adjacency graph components.
+
+\paragraph{Method \texttt{find}}
+Locate the canonical parent for node x with path compression.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+find(self, x)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+x (int): node identifier to locate.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: current root representative for x.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> uf = UF([1, 2])
+>>> uf.find(1)
+1
+\end{lstlisting}
+
+\paragraph{Method \texttt{union}}
+Merge the sets containing nodes a and b.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+union(self, a, b)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+a (int): first node to merge.
+b (int): second node to merge.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: identifier of the resulting root.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> uf = UF([1, 2])
+>>> uf.union(1, 2)
+1
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_geomap\_utils.manipulation}}
+No description provided.
+
+\subsubsection{Function \texttt{shift\_point\_cloud}}
+Translate a point cloud so a chosen origin maps to (0, 0, ...).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.manipulation import shift_point_cloud
+shift_point_cloud(points: NDArray[np.floating], *, mode: Mode | str = Mode.FIRST, origin: Iterable[float] | None = None) -> NDArray[np.float64]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (NDArray[np.floating]): input coordinates with shape ``(N, >=2)``.
+mode (Mode | str): origin-selection strategy (first/min/custom point).
+origin (Iterable[float] | None): explicit origin coordinates when ``mode`` is custom.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+NDArray[np.float64]: shifted copy of the input point cloud.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the input shape is invalid or the mode/origin are incompatible.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.manipulation import shift_point_cloud
+>>> pts = np.array([[1.0, 2.0], [3.0, 4.0]])
+>>> shift_point_cloud(pts, mode="min")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{grid\_to\_point\_cloud}}
+Convert a 2-D raster into ``(x, y, z)`` point samples with optional reprojection.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.manipulation import grid_to_point_cloud
+grid_to_point_cloud(
+    raster: np.ndarray,
+    transform: Any,
+    *,
+    src_crs: Any | None = None,
+    dst_crs: Any | None = None,
+) -> NDArray[np.float64]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+raster (np.ndarray): grid of Z values (shape ``rows x cols``).
+transform (Any): affine transform describing pixel center coordinates.
+src_crs (Any | None): CRS describing the raster coordinates (defaults to ``EPSG:4326``).
+dst_crs (Any | None): CRS for the output XY values (skip reprojection when ``None``).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+NDArray[np.float64]: flattened point cloud with columns ``[x, y, z]``.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the input raster is invalid or contains no finite samples.
+RuntimeError: If reprojection is requested but ``pyproj`` is unavailable.
+TypeError: If the transform object is missing required affine attributes.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.manipulation import grid_to_point_cloud
+>>> raster = np.array([[1.0, 2.0], [3.0, 4.0]])
+>>> class T: a=1; b=0; c=0; d=0; e=-1; f=0
+>>> pts = grid_to_point_cloud(raster, T())
+\end{lstlisting}
+
+\subsubsection{Class \texttt{Mode}}
+Strategies for choosing the translation origin.
+
+No public methods were found.
+
+\subsection{Module \texttt{mc\_geomap\_utils.planning}}
+No description provided.
+
+\subsubsection{Function \texttt{region\_mask}}
+Return a boolean mask for a single macroregion id.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import region_mask
+region_mask(macro_labels: np.ndarray, rid: int) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+macro_labels (np.ndarray): macroregion label raster.
+rid (int): region id to extract.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: boolean mask where ``macro_labels == rid``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.planning import region_mask
+>>> region_mask(np.array([[1, 2], [2, 2]]), 2)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{generate\_serpentine\_tracks\_polygon}}
+Generate parallel strips by intersecting an AOI polygon with evenly spaced lines.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import generate_serpentine_tracks_polygon
+generate_serpentine_tracks_polygon(mask: np.ndarray,
+                                        transform: Any,
+                                        psi_deg: float,
+                                        spacing_m: float,
+                                        *,
+                                        min_seg_len_m: float | None = None) -> List[List[Tuple[float, float]]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+mask (np.ndarray): boolean AOI mask.
+transform (Any): affine transform mapping pixel centers to world coords.
+psi_deg (float): heading angle in degrees.
+spacing_m (float): spacing between tracks in metres.
+min_seg_len_m (float | None): minimum segment length to keep.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[List[Tuple[float, float]]]: list of polylines, each a list of ``(x, y)`` points.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.planning import generate_serpentine_tracks_polygon
+>>> mask = np.ones((5, 5), dtype=bool)
+>>> tracks = generate_serpentine_tracks_polygon(mask, transform=None, psi_deg=0.0, spacing_m=1.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{generate\_serpentine\_tracks}}
+Raster-native generation of serpentine strips inside a binary mask.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import generate_serpentine_tracks
+generate_serpentine_tracks(mask: np.ndarray,
+                                transform: Any,
+                                psi_deg: float,
+                                spacing_m: float,
+                                cell_m: float,
+                                min_seg_len_m: float | None = None,
+                                band_tol_frac: float = 0.35) -> List[List[Tuple[float,float]]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+mask (np.ndarray): boolean AOI mask.
+transform (Any): affine transform mapping pixel centers to world coords.
+psi_deg (float): heading angle in degrees.
+spacing_m (float): spacing between tracks in metres.
+cell_m (float): raster cell size in metres.
+min_seg_len_m (float | None): minimum segment length to keep.
+band_tol_frac (float): band tolerance as a fraction of spacing.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[List[Tuple[float, float]]]: list of polylines in serpentine order.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.planning import generate_serpentine_tracks
+>>> mask = np.ones((5, 5), dtype=bool)
+>>> tracks = generate_serpentine_tracks(mask, transform=None, psi_deg=0.0, spacing_m=1.0, cell_m=1.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{attach\_altitude\_and\_tilt}}
+Sample DEM under each waypoint and attach z and tilt.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import attach_altitude_and_tilt
+attach_altitude_and_tilt(polylines: List[List[Tuple[float,float]]],
+                            dem: np.ndarray,
+                            transform: Any,
+                            h_m: float,
+                            beta_deg: float) -> List[List[Dict]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+polylines (List[List[Tuple[float, float]]]): list of track polylines.
+dem (np.ndarray): DEM raster for altitude sampling.
+transform (Any): affine transform mapping pixel centers to world coords.
+h_m (float): altitude offset to add above the DEM.
+beta_deg (float): tilt angle (degrees) assigned to each waypoint.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[List[Dict]]: list of enriched waypoints with ``x``, ``y``, ``z``, and ``tilt_deg``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.planning import attach_altitude_and_tilt
+>>> polylines = [[(0.0, 0.0), (1.0, 1.0)]]
+>>> dem = np.zeros((5, 5))
+>>> out = attach_altitude_and_tilt(polylines, dem, transform=None, h_m=2.0, beta_deg=5.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{estimate\_turn\_count}}
+Approximate number of turns (ends of segments) for quick reporting.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import estimate_turn_count
+estimate_turn_count(tracks: List[List[Tuple[float,float]]]) -> int
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+tracks (List[List[Tuple[float, float]]]): list of track polylines.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: estimated number of turns (segments minus one).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import estimate_turn_count
+>>> estimate_turn_count([[(0, 0), (1, 0)], [(1, 0), (2, 0)]])
+1
+\end{lstlisting}
+
+\subsubsection{Function \texttt{polyline\_length\_m}}
+Compute total length of a polyline.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import polyline_length_m
+polyline_length_m(points_xy: List[Tuple[float,float]]) -> float
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points_xy (List[Tuple[float, float]]): list of ``(x, y)`` points.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+float: polyline length in metres.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import polyline_length_m
+>>> polyline_length_m([(0, 0), (3, 4)])
+5.0
+\end{lstlisting}
+
+\subsubsection{Function \texttt{tracks\_total\_length\_m}}
+Compute total length across multiple polylines.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import tracks_total_length_m
+tracks_total_length_m(tracks: List[List[Tuple[float,float]]]) -> float
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+tracks (List[List[Tuple[float, float]]]): list of polylines.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+float: total length in metres.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import tracks_total_length_m
+>>> tracks_total_length_m([[(0, 0), (1, 0)], [(1, 0), (1, 1)]])
+2.0
+\end{lstlisting}
+
+\subsubsection{Function \texttt{merge\_tracks\_continuous}}
+Concatenate ordered segments into a single continuous path (bridging jumps).
+
+Each input list is assumed to be ordered along-strip. We connect the end of one
+segment to the start of the next to keep one continuous polyline per region.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import merge_tracks_continuous
+merge_tracks_continuous(tracks: List[List[Tuple[float, float]]]) -> List[Tuple[float, float]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+tracks (List[List[Tuple[float, float]]]): ordered track segments.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Tuple[float, float]]: merged continuous polyline.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import merge_tracks_continuous
+>>> merged = merge_tracks_continuous([[(0, 0), (1, 0)], [(2, 0), (3, 0)]])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{straighten\_tracks}}
+Replace each strip polyline with a straight line between its endpoints.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import straighten_tracks
+straighten_tracks(tracks: List[List[Tuple[float, float]]]) -> List[List[Tuple[float, float]]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+tracks (List[List[Tuple[float, float]]]): list of polylines.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[List[Tuple[float, float]]]: list of straightened polylines.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import straighten_tracks
+>>> out = straighten_tracks([[(0, 0), (1, 1), (2, 0)]])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{smooth\_polyline}}
+Apply a simple moving average to a polyline to soften stair-steps.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import smooth_polyline
+smooth_polyline(points: List[Tuple[float, float]], window: int = 5) -> List[Tuple[float, float]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (List[Tuple[float, float]]): polyline points.
+window (int): moving average window size (odd, >=3).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Tuple[float, float]]: smoothed polyline points.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import smooth_polyline
+>>> out = smooth_polyline([(0, 0), (1, 1), (2, 0)], window=3)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{simplify\_polyline\_rdp}}
+Douglas-Peucker simplification to reduce vertices while keeping shape.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.planning import simplify_polyline_rdp
+simplify_polyline_rdp(points: List[Tuple[float, float]], epsilon: float) -> List[Tuple[float, float]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (List[Tuple[float, float]]): polyline points.
+epsilon (float): maximum deviation allowed (metres).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Tuple[float, float]]: simplified polyline points.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.planning import simplify_polyline_rdp
+>>> out = simplify_polyline_rdp([(0, 0), (1, 0.1), (2, 0)], epsilon=0.2)
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_geomap\_utils.plotting}}
+No description provided.
+
+\subsubsection{Function \texttt{show\_plot}}
+Render one or multiple XY series using Matplotlib subplots.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import show_plot
+show_plot(data: Any, shared_axes: bool = True, separate_axes: bool = True) -> Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+data (Any): sequence, mapping, or alternating list describing XY pairs.
+shared_axes (bool): whether generated subplots share their axes.
+separate_axes (bool): split series across subplots (True) or overlay on one axis (False).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Figure: Matplotlib figure containing the requested plot layout.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.plotting import show_plot
+>>> fig = show_plot({"x": [0, 1], "y": [1, 2]})
+\end{lstlisting}
+
+\subsubsection{Function \texttt{save\_mosaic}}
+Save a 2x2 mosaic from up to 4 image paths.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import save_mosaic
+save_mosaic(paths: list[Path], out_path: Path, titles: list[str] | None = None, figsize=(12, 10)) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+paths (list[Path]): image file paths to include (up to 4).
+out_path (Path): output image path for the mosaic.
+titles (list[str] | None): optional per-image titles.
+figsize: Matplotlib figure size.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> from mc_geomap_utils.plotting import save_mosaic
+>>> save_mosaic([Path("a.png"), Path("b.png")], Path("mosaic.png"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{save\_mosaic\_1x2}}
+Save a 1x2 mosaic from up to 2 image paths, padding sizes to match.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import save_mosaic_1x2
+save_mosaic_1x2(paths: list[Path], out_path: Path, titles: list[str] | None = None, figsize=(12, 5)) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+paths (list[Path]): image file paths to include (up to 2).
+out_path (Path): output image path for the mosaic.
+titles (list[str] | None): optional per-image titles.
+figsize: Matplotlib figure size.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> from mc_geomap_utils.plotting import save_mosaic_1x2
+>>> save_mosaic_1x2([Path("a.png"), Path("b.png")], Path("mosaic_1x2.png"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_point\_cloud}}
+Send a point cloud to Open3D for interactive inspection.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_point_cloud
+plot_point_cloud(points: np.ndarray, *, draw_fn: Callable[[list[Any]], None] | None = None) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (np.ndarray): XYZ coordinates to render.
+draw_fn (Callable[[list[Any]], None] | None): optional custom Open3D draw function.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None: the side effect is an Open3D window displaying the cloud.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_point_cloud
+>>> plot_point_cloud(np.random.rand(100, 3))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_mesh}}
+Plot a triangulated surface using Matplotlib's 3D toolkit.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_mesh
+plot_mesh(points: np.ndarray, tri: Delaunay, *, show: bool = True) -> Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (np.ndarray): vertex coordinates with columns x, y, z.
+tri (Delaunay): triangulation object describing the mesh faces.
+show (bool): display the plot interactively after creation.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Figure: Matplotlib figure containing the rendered mesh.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_mesh
+>>> from scipy.spatial import Delaunay
+>>> pts = np.random.rand(10, 3)
+>>> tri = Delaunay(pts[:, :2])
+>>> fig = plot_mesh(pts, tri, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_dem}}
+Display or export a DEM using masked shading.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_dem
+plot_dem(
+    dem: np.ndarray,
+    transform: Any | None = None,
+    title: str = "DEM (Z)",
+    cmap: str = "terrain",
+    save: Path | None = None,
+    show: bool = False,
+    colorbar: bool = True,
+)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): digital elevation model raster.
+transform (Any | None): affine transform for deriving plot extent.
+title (str): title text applied to the figure.
+cmap (str): Matplotlib colormap name used to render elevation.
+save (Path | None): optional location for saving the PNG output.
+show (bool): display the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_dem
+>>> plot_dem(np.random.rand(10, 10), show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_feature\_map}}
+Render a derived feature raster (slope, VRM, BPI, etc.).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_feature_map
+plot_feature_map(arr: np.ndarray, name: str, transform: Any | None = None, save: Path | None = None, show: bool = False)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+arr (np.ndarray): feature raster to visualise.
+name (str): human-readable feature name (controls scaling and label).
+transform (Any | None): affine transform for computing the extent.
+save (Path | None): optional output path for a saved image.
+show (bool): whether to display the plot interactively.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_feature_map
+>>> plot_feature_map(np.random.rand(10, 10), "slope", show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_labels}}
+Overlay colorized labels on an optional base raster and export/display.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_labels
+plot_labels(labels: np.ndarray, transform: Any | None = None, base: np.ndarray | None = None,
+                base_name: str = "Base", save: Path | None = None, show: bool = False,
+                alpha_labels: float = 0.55, draw_boundaries: bool = True)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+labels (np.ndarray): integer label image to visualize.
+transform (Any | None): spatial transform for extent computation.
+base (np.ndarray | None): optional background raster for context.
+base_name (str): descriptive name of the background raster.
+save (Path | None): location for saving the PNG overlay.
+show (bool): show the figure interactively when True.
+alpha_labels (float): opacity applied to the label overlay.
+draw_boundaries (bool): draw boundary outlines when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_labels
+>>> plot_labels(np.random.randint(0, 3, (10, 10)), show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_policy\_map}}
+Render a policy-class raster with a categorical legend.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_policy_map
+plot_policy_map(policy_map: np.ndarray, transform, *, title="Policy classes",
+                    save=None, show=False)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+policy_map (np.ndarray): integer policy class raster.
+transform: affine transform for computing plot extent.
+title (str): figure title.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_policy_map
+>>> plot_policy_map(np.random.randint(0, 5, (10, 10)), transform=None, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_macro\_overlay}}
+Overlay macroregion boundaries on a base raster.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_macro_overlay
+plot_macro_overlay(base: np.ndarray, macro_labels: np.ndarray, transform, *, title="Macroregions over base", save=None, show=False)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+base (np.ndarray): base raster (e.g., DEM) for context.
+macro_labels (np.ndarray): macroregion labels aligned to ``base``.
+transform: affine transform for computing plot extent.
+title (str): figure title.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_macro_overlay
+>>> plot_macro_overlay(np.random.rand(10, 10), np.ones((10, 10), dtype=int), transform=None, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_macro\_with\_seeds}}
+Render DEM + macro boundaries + seed markers.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_macro_with_seeds
+plot_macro_with_seeds(
+    dem: np.ndarray,
+    macro_labels: np.ndarray,
+    transform,
+    seeds_rc: list[tuple[int, int]] | None = None,
+    *,
+    macro_transform=None,
+    seeds_debug: dict | None = None,
+    title: str = "DEM + Seeds + Macro overlay",
+    save=None,
+    show=False,
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+macro_labels (np.ndarray): macroregion labels.
+transform: affine transform for DEM extent.
+seeds_rc (list[tuple[int, int]] | None): optional seed pixel coords.
+macro_transform: optional transform for macro labels (defaults to ``transform``).
+seeds_debug (dict | None): optional debug seed sets.
+title (str): figure title.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_macro_with_seeds
+>>> plot_macro_with_seeds(np.random.rand(5, 5), np.ones((5, 5), dtype=int), transform=None, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_region\_headings}}
+Draw one heading arrow per macroregion, overlaid on a base raster.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_region_headings
+plot_region_headings(
+    macro_labels: np.ndarray,
+    psi_deg_per_id: dict[int, float],
+    transform,
+    *,
+    base: np.ndarray,                 # e.g., np.degrees(feats["slope"])
+    title: str = "Region headings",
+    save=None,
+    show: bool = False,
+    arrow_scale: float = 8.0,         # quiver scale (bigger -> shorter arrows)
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+macro_labels (np.ndarray): macroregion label raster (0 = NoData).
+psi_deg_per_id (dict[int, float]): mapping from region id to heading in degrees.
+transform: affine transform for computing extents (None for pixel coords).
+base (np.ndarray): background raster (e.g., slope in degrees).
+title (str): figure title.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+arrow_scale (float): quiver scale (larger -> shorter arrows).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_region_headings
+>>> plot_region_headings(np.ones((5, 5), dtype=int), {1: 45.0}, transform=None, base=np.zeros((5, 5)), show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_dem\_with\_policy\_overlay}}
+Overlay a policy-class map on top of a DEM.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_dem_with_policy_overlay
+plot_dem_with_policy_overlay(
+    dem: np.ndarray,
+    policy_map: np.ndarray,
+    transform,
+    *,
+    title: str = "DEM + Policy overlay",
+    base_cmap: str = "terrain",
+    hillshade: bool = False,        # set True if you like shaded relief
+    policy_alpha: float = 0.45,     # transparency of the overlay
+    use_rgba_overlay: bool = True,  # robust path that builds RGBA image explicitly
+    save=None,
+    show=False
+)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+policy_map (np.ndarray): policy class raster.
+transform: affine transform for computing extents.
+title (str): figure title.
+base_cmap (str): colormap for the DEM base layer.
+hillshade (bool): whether to use hillshade for the base layer.
+policy_alpha (float): transparency for policy overlay.
+use_rgba_overlay (bool): whether to build an explicit RGBA overlay.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_dem_with_policy_overlay
+>>> plot_dem_with_policy_overlay(np.random.rand(10, 10), np.zeros((10, 10), dtype=int), transform=None, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{make\_quicklook\_figures}}
+Generate quicklook PNGs for DEM, point density, features, and labels.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import make_quicklook_figures
+make_quicklook_figures(
+    dem: np.ndarray,
+    count: np.ndarray,
+    features: dict[str, np.ndarray] | None = None,
+    labels: np.ndarray | None = None,
+    transform: Any | None = None,
+    outdir: Path | str = "quicklooks",
+    cell: float | None = None,
+    show: bool = False
+) -> dict[str, Path]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): elevation raster used as the base layer.
+count (np.ndarray): per-cell point count raster for density plots.
+features (dict[str, np.ndarray] | None): optional feature rasters such as slope, VRM, or BPI.
+labels (np.ndarray | None): label raster to overlay on top of a base layer.
+transform (Any | None): affine transform for computing spatial extents.
+outdir (Path | str): output directory where PNGs are written.
+cell (float | None): grid cell size used for labelling/metadata (currently informational).
+show (bool): display the generated Matplotlib figures interactively.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict[str, Path]: mapping between quicklook identifier and saved PNG path.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import make_quicklook_figures
+>>> dem = np.random.rand(5, 5)
+>>> count = np.ones((5, 5))
+>>> outputs = make_quicklook_figures(dem, count, outdir="quicklooks", show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_tracks\_overlay}}
+Overlay survey tracks on a DEM.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_tracks_overlay
+plot_tracks_overlay(dem: np.ndarray,
+                        transform,
+                        tracks: list[list[tuple[float,float]]],
+                        *,
+                        title: str = "Planned tracks",
+                        color: str = "k",
+                        linewidth: float = 1.0,
+                        save=None,
+                        show=False)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform: affine transform for computing extents.
+tracks (list[list[tuple[float, float]]]): list of track polylines.
+title (str): figure title.
+color (str): track color.
+linewidth (float): track line width.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_tracks_overlay
+>>> plot_tracks_overlay(np.random.rand(5, 5), transform=None, tracks=[[(0, 0), (1, 1)]], show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_tracks\_overlay\_by\_region}}
+Plot serpentine tracks with a distinct color per region (one continuous line each).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_tracks_overlay_by_region
+plot_tracks_overlay_by_region(
+    dem: np.ndarray,
+    transform,
+    tracks_by_region: dict[int, list[list[tuple[float, float]]]],
+    *,
+    title: str = "Planned tracks",
+    linewidth: float = 1.0,
+    save=None,
+    show=False,
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform: affine transform for computing extents.
+tracks_by_region (dict[int, list[list[tuple[float, float]]]]): mapping from region id to tracks.
+title (str): figure title.
+linewidth (float): track line width.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_tracks_overlay_by_region
+>>> tracks = {1: [[(0, 0), (1, 1)]]}
+>>> plot_tracks_overlay_by_region(np.random.rand(5, 5), transform=None, tracks_by_region=tracks, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_macro\_tracks\_overlay}}
+Plot DEM with macroregion boundaries and region-colored tracks.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_macro_tracks_overlay
+plot_macro_tracks_overlay(
+    dem: np.ndarray,
+    macro_labels: np.ndarray,
+    transform,
+    tracks_by_region: dict[int, list[list[tuple[float, float]]]],
+    *,
+    title: str = "Macroregions + Tracks",
+    linewidth: float = 1.0,
+    save=None,
+    show=False,
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+macro_labels (np.ndarray): macroregion labels aligned to ``dem``.
+transform: affine transform for computing extents.
+tracks_by_region (dict[int, list[list[tuple[float, float]]]]): mapping from region id to tracks.
+title (str): figure title.
+linewidth (float): track line width.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_macro_tracks_overlay
+>>> tracks = {1: [[(0, 0), (1, 1)]]}
+>>> plot_macro_tracks_overlay(np.random.rand(5, 5), np.ones((5, 5), dtype=int), transform=None, tracks_by_region=tracks, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_dem\_with\_polygon}}
+Plot DEM with an outline of the polygon AOI and optional tracks.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_dem_with_polygon
+plot_dem_with_polygon(
+    dem: np.ndarray,
+    transform,
+    polygon_xy: np.ndarray,
+    *,
+    tracks: dict[int, list[list[tuple[float, float]]]] | None = None,
+    macro_labels: np.ndarray | None = None,
+    macro_transform=None,
+    title: str = "DEM + AOI",
+    save=None,
+    show=False,
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform: affine transform for computing extents.
+polygon_xy (np.ndarray): polygon vertices in world coordinates.
+tracks (dict[int, list[list[tuple[float, float]]]] | None): optional tracks by region.
+macro_labels (np.ndarray | None): optional macroregion labels.
+macro_transform: optional transform for macro labels.
+title (str): figure title.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_dem_with_polygon
+>>> plot_dem_with_polygon(np.random.rand(5, 5), transform=None, polygon_xy=np.array([[0,0],[1,0],[1,1],[0,1]]), show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_primitives\_overlay}}
+Draw detected primitives on top of the DEM.
+
+Rows may contain either the new fields (``prim\_cx\_px``, ``prim\_cy\_px``, ``prim\_r\_m``)
+or legacy ones (``cx\_px``, ``cy\_px``, ``r\_m``). New names are preferred.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_primitives_overlay
+plot_primitives_overlay(
+    dem: np.ndarray,
+    transform,
+    rows: list[dict],
+    macro_labels: np.ndarray,
+    *,
+    title: str = "DEM + Primitives overlay",
+    base_cmap: str = "terrain",
+    save=None,
+    show=False,
+    macro_transform=None,
+)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform: affine transform for computing extents.
+rows (list[dict]): region rows containing primitive metadata.
+macro_labels (np.ndarray): macroregion labels aligned to ``dem``.
+title (str): figure title.
+base_cmap (str): colormap for the DEM base layer.
+save: optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+macro_transform: optional transform for macro labels.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_primitives_overlay
+>>> plot_primitives_overlay(np.random.rand(5, 5), transform=None, rows=[], macro_labels=np.zeros((5, 5), dtype=int), show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_knoll\_diagnostics}}
+Diagnostic plot for DEM-based knoll detection.
+
+Shows DEM background, macroregion boundaries, and seed points at different
+filtering stages (when available).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_knoll_diagnostics
+plot_knoll_diagnostics(
+    dem: np.ndarray,
+    transform: Any,
+    feats: dict[str, np.ndarray],
+    macro_labels: np.ndarray | None,
+    *,
+    macro_transform=None,
+    save: Path | str | None = None,
+    show: bool = False,
+) -> Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform (Any): affine transform for computing extents.
+feats (dict[str, np.ndarray]): feature rasters used by knoll detection.
+macro_labels (np.ndarray | None): macroregion labels aligned to ``dem``.
+macro_transform: optional transform for macro labels.
+save (Path | str | None): optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Figure: Matplotlib figure containing the diagnostic plot.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_knoll_diagnostics
+>>> feats = {"slope": np.zeros((5, 5))}
+>>> fig = plot_knoll_diagnostics(np.random.rand(5, 5), transform=None, feats=feats, macro_labels=None, show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_primitives\_3d}}
+Render DEM as a surface with fitted primitive footprints (ellipse wires).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_primitives_3d
+plot_primitives_3d(
+    dem: np.ndarray,
+    transform: Any,
+    rows: list[dict],
+    *,
+    title: str = "DEM + Primitive fit (3D)",
+    save: Path | str | None = None,
+    show: bool = False,
+) -> Figure | None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform (Any): affine transform for computing world coordinates.
+rows (list[dict]): region rows containing primitive ellipse metadata.
+title (str): figure title.
+save (Path | str | None): optional output path for saving the figure.
+show (bool): show the figure interactively when True.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Figure | None: Matplotlib figure, or ``None`` if ``transform`` is missing.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_primitives_3d
+>>> fig = plot_primitives_3d(np.random.rand(5, 5), transform=None, rows=[], show=False)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_primitives\_3d\_interactive}}
+Export an interactive HTML (Plotly) with DEM surface and fitted primitives.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_primitives_3d_interactive
+plot_primitives_3d_interactive(
+    dem: np.ndarray,
+    transform: Any,
+    rows: list[dict],
+    *,
+    title: str = "DEM + Primitive fit (3D, interactive)",
+    save: Path | str | None = None,
+) -> Any
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform (Any): affine transform for computing world coordinates.
+rows (list[dict]): region rows containing primitive metadata.
+title (str): figure title.
+save (Path | str | None): optional output path for saving the HTML.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Any: Plotly figure (or ``None`` if dependencies are unavailable).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_primitives_3d_interactive
+>>> fig = plot_primitives_3d_interactive(np.random.rand(5, 5), transform=None, rows=[], save=None)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_tracks\_3d\_interactive}}
+Export an interactive 3D HTML with DEM surface and colored tracks.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_tracks_3d_interactive
+plot_tracks_3d_interactive(
+    dem: np.ndarray,
+    transform: Any,
+    tracks_by_region: dict[int, list[list[tuple[float, float]]]],
+    *,
+    title: str = "DEM + Tracks (3D, interactive)",
+    save: Path | str | None = None,
+    fancy: bool = False,
+) -> Any
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform (Any): affine transform for computing world coordinates.
+tracks_by_region (dict[int, list[list[tuple[float, float]]]]): mapping from region id to tracks.
+title (str): figure title.
+save (Path | str | None): optional output path for saving the HTML.
+fancy (bool): enable enhanced styling.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Any: Plotly figure (or ``None`` if dependencies are unavailable).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_tracks_3d_interactive
+>>> fig = plot_tracks_3d_interactive(np.random.rand(5, 5), transform=None, tracks_by_region={}, save=None)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_macro\_labels\_3d\_interactive}}
+Export an interactive 3D HTML with DEM surface colored by macroregion IDs or policy classes.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_macro_labels_3d_interactive
+plot_macro_labels_3d_interactive(
+    dem: np.ndarray,
+    macro_labels: np.ndarray,
+    transform: Any,
+    *,
+    title: str = "DEM + Macroregions (3D, interactive)",
+    save: Path | str | None = None,
+    policy_map: np.ndarray | None = None,
+    fancy: bool = False,
+) -> Any
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+macro_labels (np.ndarray): macroregion labels aligned to ``dem``.
+transform (Any): affine transform for computing world coordinates.
+title (str): figure title.
+save (Path | str | None): optional output path for saving the HTML.
+policy_map (np.ndarray | None): optional policy classes for coloring.
+fancy (bool): enable enhanced styling.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Any: Plotly figure (or ``None`` if dependencies are unavailable).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_macro_labels_3d_interactive
+>>> fig = plot_macro_labels_3d_interactive(np.random.rand(5, 5), np.ones((5, 5), dtype=int), transform=None, save=None)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_knoll\_ellipses\_3d}}
+Interactive 3D DEM with cylindrical ellipses for knoll footprints.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.plotting import plot_knoll_ellipses_3d
+plot_knoll_ellipses_3d(
+    dem: np.ndarray,
+    transform: Any,
+    rows: list[dict],
+    *,
+    title: str = "DEM + Knoll ellipses (3D)",
+    save=None,
+    alpha_surface: float = 0.8,
+)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster.
+transform (Any): affine transform for computing world coordinates.
+rows (list[dict]): region rows containing ellipse metadata.
+title (str): figure title.
+save: optional output path for saving the HTML.
+alpha_surface (float): surface transparency.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Any: Plotly figure.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ImportError: If Plotly is unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.plotting import plot_knoll_ellipses_3d
+>>> fig = plot_knoll_ellipses_3d(np.random.rand(5, 5), transform=None, rows=[], save=None)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{PlotDataSource}}
+Container helping turn assorted inputs into labelled XY series.
+
+\paragraph{Method \texttt{from\_input}}
+Normalise many possible user inputs into a consistent mapping.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from_input(cls, raw: Any) -> "PlotDataSource"
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+raw (Any): mapping of labels to arrays or alternating key/value sequence.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+PlotDataSource: wrapper holding the parsed series.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.plotting import PlotDataSource
+>>> ds = PlotDataSource.from_input({"x": [0, 1], "y": [1, 2]})
+\end{lstlisting}
+
+\paragraph{Method \texttt{iter\_xy\_pairs}}
+Yield paired X/Y arrays for plotting convenience.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+iter_xy_pairs(self) -> list[tuple[str, np.ndarray, np.ndarray]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+list[tuple[str, np.ndarray, np.ndarray]]: tuples containing label, x-array, and y-array.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.plotting import PlotDataSource
+>>> ds = PlotDataSource.from_input({"x": [0, 1], "y": [1, 2]})
+>>> ds.iter_xy_pairs()
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_geomap\_utils.pointcloud}}
+No description provided.
+
+\subsubsection{Function \texttt{delaunay\_mesh}}
+Build a 2.5D Delaunay triangulation from XY coordinates.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.pointcloud import delaunay_mesh
+delaunay_mesh(points: np.ndarray) -> Delaunay
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (np.ndarray): input point cloud with columns ``x, y, z``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Delaunay: triangulation object describing XY simplices.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.pointcloud import delaunay_mesh
+>>> tri = delaunay_mesh(np.random.rand(10, 3))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{mesh\_to\_obj}}
+Write a triangulated mesh to disk in OBJ format.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.pointcloud import mesh_to_obj
+mesh_to_obj(points: np.ndarray, tri: Delaunay, filename: Path | str = "mesh.obj") -> Path
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (np.ndarray): vertex positions used by the triangulation.
+tri (Delaunay): triangulation describing mesh faces.
+filename (Path | str): destination file path for the OBJ export.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Path: path to the created OBJ file.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If ``trimesh`` is unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.pointcloud import delaunay_mesh, mesh_to_obj
+>>> pts = np.random.rand(10, 3)
+>>> tri = delaunay_mesh(pts)
+>>> _ = mesh_to_obj(pts, tri, "mesh.obj")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{delaunay\_to\_open3d\_mesh}}
+Convert a SciPy triangulation to an Open3D TriangleMesh instance.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.pointcloud import delaunay_to_open3d_mesh
+delaunay_to_open3d_mesh(points: np.ndarray, tri: Delaunay) -> Any
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (np.ndarray): vertex coordinates (N x 3).
+tri (Delaunay): triangulation whose simplices form mesh faces.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Any: Open3D ``TriangleMesh`` ready for visualization.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If ``open3d`` is unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.pointcloud import delaunay_mesh, delaunay_to_open3d_mesh
+>>> pts = np.random.rand(10, 3)
+>>> tri = delaunay_mesh(pts)
+>>> mesh = delaunay_to_open3d_mesh(pts, tri)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{grid\_to\_dem}}
+Rasterize an irregular point cloud into a DEM and count grid.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.pointcloud import grid_to_dem
+grid_to_dem(points: np.ndarray, cell: float = 0.5, min_count: int = 3, agg: str = "median")
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points (np.ndarray): input XYZ coordinates.
+cell (float): grid resolution in the XY plane.
+min_count (int): minimum samples required to keep a raster cell.
+agg (str): aggregation strategy ("median", "mean", or percentile ``pXX``).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+tuple[np.ndarray, np.ndarray, Any]: DEM array, per-cell counts, and raster transform.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If an unsupported aggregation strategy is requested.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.pointcloud import grid_to_dem
+>>> pts = np.array([[0.0, 0.0, 1.0], [0.1, 0.1, 2.0]])
+>>> dem, counts, transform = grid_to_dem(pts, cell=0.5)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{dem\_to\_features}}
+Derive terrain features (slope, curvature, VRM, BPI) from a DEM.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.pointcloud import dem_to_features
+dem_to_features(dem: np.ndarray, cell: float = 0.5, smooth_sigma_cells: float = 1.0,
+                    vrm_win_cells: int = 11)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): raster DEM with NaNs marking gaps.
+cell (float): grid spacing in metres.
+smooth_sigma_cells (float): Gaussian sigma (in cells) for derivative smoothing.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict[str, np.ndarray]: mapping of feature names to float32 rasters.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the DEM contains no finite samples.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.pointcloud import dem_to_features
+>>> dem = np.array([[1.0, 2.0], [3.0, 4.0]], dtype=float)
+>>> feats = dem_to_features(dem, cell=1.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{feature\_to\_slic\_segmentation}}
+Segment feature rasters with SLIC to produce superpixel labels.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.pointcloud import feature_to_slic_segmentation
+feature_to_slic_segmentation(features: dict, cell: float, W: float = 3.0, compactness: float = 30.0)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+features (dict): dictionary containing feature rasters (slope, k1, k2, vrm, bpi).
+cell (float): grid spacing used when estimating segment sizes.
+W (float): nominal swath width controlling the desired segment area.
+compactness (float): SLIC compactness parameter balancing color and spatial distance.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+np.ndarray: integer label image (same shape as the DEM features).
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If scikit-image is unavailable.
+ValueError: If no valid pixels exist in the input features.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.pointcloud import feature_to_slic_segmentation
+>>> feats = {"slope": np.ones((10, 10)), "k1": np.zeros((10, 10)), "k2": np.zeros((10, 10)), "vrm": np.zeros((10, 10)), "bpi": np.zeros((10, 10))}
+>>> labels = feature_to_slic_segmentation(feats, cell=1.0)
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_geomap\_utils.primitives}}
+No description provided.
+
+\subsubsection{Function \texttt{detect\_knolls}}
+Detect knoll-like blobs on |nablaslope| using thresholding and shape filters.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.primitives import detect_knolls
+detect_knolls(
+    feats: dict[str, np.ndarray],
+    macro_labels: np.ndarray,
+    rows: list[dict],
+    *,
+    cell_m: float,
+    W_m: float,
+    slope_ring_deg: float = 12.0,
+    circ_cv_max: float = 0.20,
+    rmin_mult: float = 1.5,
+    rmax_mult: float = 4.0,
+    spiral_rmin_m: float = 1.0,
+    size_relax: float = 1.0,
+    use_grad_seeds: bool = True,  # retained for CLI compatibility
+    grad_seed_pct: float = 85.0,
+    dem: np.ndarray | None = None,
+) -> List[Knoll]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+feats (dict[str, np.ndarray]): feature rasters (expects ``"slope"`` and optionally ``"dem"``).
+macro_labels (np.ndarray): macroregion label raster aligned to ``feats``.
+rows (list[dict]): region metadata rows (used for default spacing/heading).
+cell_m (float): raster cell size in metres.
+W_m (float): nominal swath width in metres.
+slope_ring_deg (float): slope ring threshold in degrees.
+circ_cv_max (float): maximum allowed circularity coefficient of variation.
+rmin_mult (float): minimum radius multiplier relative to ``W_m``.
+rmax_mult (float): maximum radius multiplier relative to ``W_m``.
+spiral_rmin_m (float): minimum spiral radius for forced footprints.
+size_relax (float): softening factor for size limits.
+use_grad_seeds (bool): when True, seed from gradient magnitude peaks.
+grad_seed_pct (float): percentile for gradient thresholding when seeding.
+dem (np.ndarray | None): optional DEM for height metadata.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Knoll]: detected knoll objects sorted by score.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.primitives import detect_knolls
+>>> feats = {"slope": np.zeros((10, 10))}
+>>> knolls = detect_knolls(feats, np.zeros((10, 10), dtype=int), [], cell_m=1.0, W_m=3.0, spiral_rmin_m=1.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{detect\_knolls\_plane\_descent}}
+Detect knolls by descending a plane and tracking connected super-level sets.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.primitives import detect_knolls_plane_descent
+detect_knolls_plane_descent(
+    dem: np.ndarray,
+    macro_labels: np.ndarray,
+    rows: list[dict],
+    *,
+    cell_m: float,
+    W_m: float,
+    rmin_mult: float = 1.5,
+    rmax_mult: float = 4.0,
+    prominence_min_m: float = 3.0,
+    descent_dmax_m: float = 30.0,
+    dz_m: float = 0.5,
+    size_relax: float = 1.0,
+    cls_by_id: Dict[int, int] | None = None,
+    steep_only: bool = False,
+) -> List[Knoll]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+dem (np.ndarray): DEM raster used for plane descent.
+macro_labels (np.ndarray): macroregion label raster aligned to ``dem``.
+rows (list[dict]): region metadata rows (used for default spacing/heading).
+cell_m (float): raster cell size in metres.
+W_m (float): nominal swath width in metres.
+rmin_mult (float): minimum radius multiplier relative to ``W_m``.
+rmax_mult (float): maximum radius multiplier relative to ``W_m``.
+prominence_min_m (float): minimum prominence for a seed peak.
+descent_dmax_m (float): maximum descent depth.
+dz_m (float): vertical step for plane descent.
+size_relax (float): softening factor for size limits.
+cls_by_id (Dict[int, int] | None): optional macroregion class lookup.
+steep_only (bool): when True, keep only steep class regions.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Knoll]: detected knoll objects sorted by score.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.primitives import detect_knolls_plane_descent
+>>> dem = np.random.rand(10, 10)
+>>> knolls = detect_knolls_plane_descent(dem, np.zeros((10, 10), dtype=int), [], cell_m=1.0, W_m=3.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{augment\_regions\_with\_primitives}}
+Attach primitive metadata (spiral around knoll) to region rows.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.primitives import augment_regions_with_primitives
+augment_regions_with_primitives(
+    rows: list[dict],
+    macro_labels: np.ndarray,
+    feats: dict[str, np.ndarray],
+    transform: Any,
+    *,
+    cell_m: float,
+    W_m: float,
+    slope_ring_deg: float,
+    circ_cv_max: float,
+    rmin_mult: float,
+    rmax_mult: float,
+    size_relax: float = 1.0,
+    spiral_rmin_m: float,
+    use_grad_seeds: bool = True,
+    grad_seed_pct: float = 85.0,
+    dem: np.ndarray | None = None,
+    method: str = "ring",
+    prominence_min_m: float = 3.0,
+    descent_dmax_m: float = 30.0,
+    dz_m: float = 0.5,
+    steep_only: bool = False,
+    force_seeds_xy: list[tuple[float, float]] | None = None,
+    force_plane_z: float | None = None,
+    force_plane_z_list: list[float] | None = None,
+    force_min_diam_m: float = 0.0,
+) -> list[dict]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+rows (list[dict]): region records to augment in place.
+macro_labels (np.ndarray): macroregion label raster.
+feats (dict[str, np.ndarray]): feature rasters (expects ``"slope"`` and optionally ``"dem"``).
+transform (Any): affine transform mapping pixel centers to world coords.
+cell_m (float): raster cell size in metres.
+W_m (float): nominal swath width in metres.
+slope_ring_deg (float): slope ring threshold in degrees.
+circ_cv_max (float): maximum allowed circularity coefficient of variation.
+rmin_mult (float): minimum radius multiplier relative to ``W_m``.
+rmax_mult (float): maximum radius multiplier relative to ``W_m``.
+size_relax (float): softening factor for size limits.
+spiral_rmin_m (float): minimum spiral radius for forced footprints.
+use_grad_seeds (bool): whether to seed from gradient magnitude peaks.
+grad_seed_pct (float): percentile for gradient thresholding when seeding.
+dem (np.ndarray | None): optional DEM for height metadata.
+method (str): detection method (``"ring"`` or ``"plane"``).
+prominence_min_m (float): minimum prominence for plane descent.
+descent_dmax_m (float): maximum descent depth.
+dz_m (float): vertical step for plane descent.
+steep_only (bool): when True, keep only steep class regions.
+force_seeds_xy (list[tuple[float, float]] | None): force-add seeds (world coords).
+force_plane_z (float | None): optional target plane for forced footprints.
+force_plane_z_list (list[float] | None): optional per-seed plane heights.
+force_min_diam_m (float): minimum diameter for forced footprints.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+list[dict]: updated region rows (same list, augmented in place).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.primitives import augment_regions_with_primitives
+>>> rows = [{"id": 1}]
+>>> feats = {"slope": np.zeros((5, 5))}
+>>> out = augment_regions_with_primitives(rows, np.ones((5, 5), dtype=int), feats, transform=None, cell_m=1.0, W_m=3.0,
+...                                       slope_ring_deg=12.0, circ_cv_max=0.2, rmin_mult=1.5, rmax_mult=4.0, spiral_rmin_m=1.0)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{Knoll}}
+No description provided.
+
+No public methods were found.
+
+\subsection{Module \texttt{mc\_geomap\_utils.spiral}}
+No description provided.
+
+\subsubsection{Function \texttt{archimedean\_spiral}}
+Generate a constant-spacing Archimedean spiral polyline.
+
+The spiral follows ``r(theta) = r\_out - b*theta`` with ``2pib = d\_m`` and proceeds
+inward from ``r\_out`` to ``r\_in``.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.spiral import archimedean_spiral
+archimedean_spiral(center_xy: Tuple[float,float],
+                        r_out: float,
+                        d_m: float,
+                        r_in: float,
+                        *,
+                        step_m: float | None = None) -> List[Tuple[float,float]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+center_xy (Tuple[float, float]): spiral center in world coordinates.
+r_out (float): outer radius in metres.
+d_m (float): spacing between successive turns in metres.
+r_in (float): inner radius cutoff in metres.
+step_m (float | None): approximate step length along the curve (defaults to ``0.5 * d_m``).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Tuple[float, float]]: list of ``(x, y)`` points defining the spiral polyline.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_geomap_utils.spiral import archimedean_spiral
+>>> pts = archimedean_spiral((0.0, 0.0), r_out=10.0, d_m=2.0, r_in=1.0)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{clip\_polyline\_to\_mask}}
+Clip a polyline to a raster mask and return contiguous valid segments.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_geomap_utils.spiral import clip_polyline_to_mask
+clip_polyline_to_mask(points_xy: List[Tuple[float,float]],
+                            mask: np.ndarray,
+                            transform: Any) -> List[List[Tuple[float,float]]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+points_xy (List[Tuple[float, float]]): input polyline points in world coordinates.
+mask (np.ndarray): boolean raster mask (True = keep).
+transform (Any): affine transform mapping pixel centers to world coordinates.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[List[Tuple[float, float]]]: list of polyline segments contained within the mask.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_geomap_utils.spiral import clip_polyline_to_mask
+>>> mask = np.ones((10, 10), dtype=bool)
+>>> class T: a=1; b=0; c=0; d=0; e=-1; f=0
+>>> segs = clip_polyline_to_mask([(0.5, -0.5), (5.5, -5.5)], mask, T())
+\end{lstlisting}
+
+
+\section{Package \texttt{mc\_io\_utils}}
+\subsection{Module \texttt{mc\_io\_utils}}
+IO utilities.
+
+Exports:
+- scan\_channels
+- list\_channel\_fields
+- from\_imu\_kearfott\_compas
+- list\_files
+- load\_csv\_timeseries\_to\_mc\_kinematics
+- PointFileMode
+- McPointFileMode
+- clear\_console
+- setup\_logging\_from\_yaml
+- check\_output\_file
+- sum\_total\_bytes
+- estimate\_total\_bytes
+
+LCM/adapters exports are available when optional dependencies are installed.
+
+No public functions or classes were found in this module.
+
+\subsection{Module \texttt{mc\_io\_utils.adapters}}
+LCM channel adapters.
+
+Functions:
+- from\_imu\_kearfott\_compas(imu)
+
+\subsubsection{Function \texttt{from\_imu\_kearfott\_compas}}
+Build KinematicsData from an IMU\_KEARFOTT\_COMPAS dict.
+
+Populates:
+- body.pos.psi/theta/phi from quaternion orientation (rad)
+- body.vel.x/y/z from angRate (rad/s)
+- body.acc.x/y/z from xyz\_ddot (m/s\textasciicircum{}2)
+- t\_s from lcm\_timestamp (or header timestamp)
+- t\_datetime from header timestamp when available
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.adapters import from_imu_kearfott_compas
+from_imu_kearfott_compas(imu: Dict) -> McKinematicsData
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+imu (Dict): decoded LCM message dict with fields like ``orientation``, ``angRate``,
+``xyz_ddot``, and timestamps.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+McKinematicsData: populated kinematics data with body frame fields.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If required fields are missing.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.adapters import from_imu_kearfott_compas
+>>> data = from_imu_kearfott_compas(imu_dict)
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_io\_utils.io}}
+IO helpers for point clouds and raster outputs.
+
+Functions:
+- list\_files(folder, pattern="*", recursive=False)
+- load\_points(file\_path, mode=...)
+- load\_csv\_timeseries\_to\_mc\_kinematics(file\_path, columns, ...)
+- save\_points(file\_path, points)
+- load\_grd(...)
+- write\_geotiff(...)
+
+\subsubsection{Function \texttt{load\_csv\_timeseries\_to\_mc\_kinematics}}
+Load a CSV timeseries and map columns into ``McKinematicsData``.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.io import load_csv_timeseries_to_mc_kinematics
+load_csv_timeseries_to_mc_kinematics(
+    file_path: Path | str,
+    columns: Sequence[str],
+    *,
+    delimiter: str = ",",
+    has_header: bool = False,
+    skip_rows: int = 0,
+    datetime_format: str | None = None,
+    units: Optional[Dict[str, str]] = None,
+)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path | str): CSV file path.
+columns (Sequence[str]): ordered mapping for CSV columns (left-to-right), e.g.
+    ``["t_s", "body.pos.phi", "body.pos.theta", "body.pos.psi"]``.
+    Supported aliases for ignored columns: ``""``, ``"_"``, ``"-"``, ``"ignore"``.
+    Supported kinematics keys: ``<frame>.<group>.<field>`` with
+    ``frame in {ned, body}``, ``group in {pos, vel, acc}``, and
+    ``field in {x, y, z, psi, theta, phi}``.
+    A 2-part key like ``pos.x`` defaults to frame ``body``.
+delimiter (str): CSV delimiter (default: ``,``,).
+has_header (bool): whether to skip one header row.
+skip_rows (int): additional rows to skip after optional header.
+datetime_format (str | None): ``strptime`` format for ``t_datetime`` values.
+    If omitted, ISO-8601 parsing is used.
+units (Optional[Dict[str, str]]): optional unit overrides merged into default units.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+McKinematicsData: populated kinematics structure.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If column mapping is invalid or CSV rows are malformed.
+KeyError: If neither ``t_s`` nor ``t_datetime`` is provided.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.io import load_csv_timeseries_to_mc_kinematics
+>>> data = load_csv_timeseries_to_mc_kinematics(
+...     "imu.csv",
+...     columns=["t_s", "body.pos.phi", "body.pos.theta", "body.pos.psi"],
+... )
+\end{lstlisting}
+
+\subsubsection{Function \texttt{load\_points}}
+Load a whitespace-delimited point cloud into a NumPy array.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.io import load_points
+load_points(file_path: Path, *, mode: PointFileMode | str = PointFileMode.VERTICAL) -> NDArray[np.float64]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path): absolute path to the source XYZ text file.
+mode (PointFileMode | str): "vertical" for one point per line, "horizontal" for per-axis rows.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+NDArray[np.float64]: array with columns ``x, y, z`` describing each point.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the file contents are malformed or incompatible with the chosen layout.
+FileNotFoundError: If ``file_path`` does not exist.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> from mc_io_utils.io import load_points
+>>> pts = load_points(Path("points.xyz"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_files}}
+List files in a folder matching a glob pattern.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.io import list_files
+list_files(folder: str | Path, pattern: str = "*", recursive: bool = False) -> List[Path]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+folder (str | Path): directory to search.
+pattern (str): glob pattern, e.g. "*.txt".
+recursive (bool): when True, search recursively (uses rglob).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[Path]: matching file paths.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+FileNotFoundError: If ``folder`` does not exist or is not a directory.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.io import list_files
+>>> files = list_files("data", "*.txt", recursive=True)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{save\_points}}
+Persist a point cloud next to the original file with a ``*\_cleaned`` suffix.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.io import save_points
+save_points(file_path: Path, points: np.ndarray) -> Path
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path): original input file whose directory will host the cleaned copy.
+points (np.ndarray): coordinates to be written (shape N x 3).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Path: filesystem path of the generated ``*_cleaned.txt`` file.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> import numpy as np
+>>> from mc_io_utils.io import save_points
+>>> out_path = save_points(Path("points.xyz"), np.zeros((3, 3)))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{load\_grd}}
+Load a GMT/NetCDF ``.grd`` file and return its raster plus metadata.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.io import load_grd
+load_grd(
+    file_path: Path | str,
+    *,
+    assume_wgs84: bool = True,
+) -> tuple[np.ndarray, Any, Any | None]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (Path | str): path to the grid file on disk.
+assume_wgs84 (bool): inject ``EPSG:4326`` when the dataset lacks a CRS.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+tuple[np.ndarray, Any, Any | None]: data array, affine transform, and CRS (if present).
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+FileNotFoundError: If the grid file does not exist.
+RuntimeError: If ``rasterio`` is unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.io import load_grd
+>>> data, transform, crs = load_grd("surface.grd")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{write\_geotiff}}
+Persist a NumPy array as a single-band GeoTIFF (with .npy fallback).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.io import write_geotiff
+write_geotiff(
+    path: Path | str,
+    arr: np.ndarray,
+    transform: Any,
+    *,
+    crs: str | None = None,
+    nodata: float | None = np.nan,
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+path (Path | str): destination file path for the raster.
+arr (np.ndarray): image data to be written.
+transform (Any): affine transform describing pixel-to-world mapping.
+crs (str | None): coordinate reference system identifier.
+nodata (float | None): value representing no-data cells.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_io_utils.io import write_geotiff
+>>> write_geotiff("out.tif", np.zeros((10, 10)), transform=None)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{PointFileMode}}
+Layout of coordinates inside a plain-text point cloud file.
+
+No public methods were found.
+
+\subsection{Module \texttt{mc\_io\_utils.lcm}}
+LCM log IO utilities.
+
+Functions:
+- scan\_channels(log\_dir, file\_pattern, max\_events=None)
+- scan\_logs\_detailed(log\_paths, ...)
+- list\_channel\_fields(log\_path, channels, lcm\_packages=None)
+- list\_channel\_fields\_in\_dir(log\_dir, file\_pattern, channel, lcm\_packages=None)
+- lcmlog\_to\_pickle(log\_dir, file\_pattern="*.00", channels=None, out\_path="lcmlogs\_merged.pkl", lcm\_packages=None, format="pickle")
+- main()  \# CLI entrypoint
+
+\subsubsection{Function \texttt{scan\_channels}}
+Scan raw LCM log files and return channel counts.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.lcm import scan_channels
+scan_channels(log_dir: str, file_pattern: str, max_events: int | None = None) -> Dict[str, int]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+log_dir (str): directory containing LCM log files.
+file_pattern (str): glob pattern to match log files (e.g. ``"*.00"``).
+max_events (int | None): optional cap on events to scan across files.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, int]: mapping of channel name to message count.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+FileNotFoundError: If the directory or matching files are not found.
+RuntimeError: If the LCM Python bindings are unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.lcm import scan_channels
+>>> counts = scan_channels("lcmlogs", "*.00", max_events=1000)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{scan\_logs\_detailed}}
+Scan LCM logs and return counts, timestamp quality, and optional sync metrics.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.lcm import scan_logs_detailed
+scan_logs_detailed(
+    log_paths: Iterable[str | Path],
+    *,
+    max_events_per_file: int | None = None,
+    gap_warning_seconds: float = 1.0,
+    sonar_channels: Optional[Iterable[str]] = None,
+    gps_channels: Optional[Iterable[str]] = None,
+    rph_channels: Optional[Iterable[str]] = None,
+) -> LCMScanStats
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+log_paths: iterable of LCM log file paths to scan in order.
+max_events_per_file: optional cap of scanned events per file.
+gap_warning_seconds: threshold used for ``gap_over_threshold`` counters.
+sonar_channels: channels used as sync reference events.
+gps_channels: channels treated as GPS time references.
+rph_channels: channels treated as RPH/attitude time references.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+LCMScanStats: aggregate and per-file metrics.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If LCM bindings are unavailable.
+ValueError: If ``log_paths`` is empty.
+FileNotFoundError: If any provided file does not exist.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.lcm import scan_logs_detailed
+>>> stats = scan_logs_detailed(["log.00"], gap_warning_seconds=0.5)
+>>> stats.total_events >= 0
+True
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_channel\_fields}}
+Decode one message per channel and list available fields.
+
+Returns a dict: \{channel: \{"lcmtype": str|None, "fields": [..], "header\_fields": [..]\}\}
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.lcm import list_channel_fields
+list_channel_fields(
+    log_path: str,
+    channels: Iterable[str],
+    lcm_packages: Optional[list[str]] = None,
+) -> Dict[str, Dict[str, object]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+log_path (str): path to a single LCM log file.
+channels (Iterable[str]): channel names to inspect.
+lcm_packages (Optional[list[str]]): optional list of Python LCM packages to import.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, Dict[str, object]]: per-channel metadata including lcmtype and field lists.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If the LCM Python bindings are unavailable.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.lcm import list_channel_fields
+>>> info = list_channel_fields("log.00", ["IMU_KEARFOTT_COMPAS"])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_channel\_fields\_in\_dir}}
+Convenience wrapper to read one log file in a directory and list channel fields.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.lcm import list_channel_fields_in_dir
+list_channel_fields_in_dir(
+    log_dir: str,
+    file_pattern: str,
+    channel: str,
+    lcm_packages: Optional[list[str]] = None,
+) -> Dict[str, object]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+log_dir (str): directory containing LCM logs.
+file_pattern (str): glob pattern used to select a log file.
+channel (str): channel name to inspect.
+lcm_packages (Optional[list[str]]): optional list of Python LCM packages to import.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, object]: dictionary with ``channel``, ``lcmtype``, and ``fields`` entries.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+FileNotFoundError: If the directory or matching files are not found.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.lcm import list_channel_fields_in_dir
+>>> entry = list_channel_fields_in_dir("lcmlogs", "*.00", "IMU_KEARFOTT_COMPAS")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{lcmlog\_to\_pickle}}
+Convert raw LCM logs to a merged output file.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.lcm import lcmlog_to_pickle
+lcmlog_to_pickle(
+    log_dir: str,
+    file_pattern: str = "*.00",
+    channels: Optional[Iterable[str]] = None,
+    out_path: str = "lcmlogs_merged.pkl",
+    lcm_packages: Optional[list[str]] = None,
+    format: str = "pickle",
+    *,
+    verbose: bool = True,
+) -> Path
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+log_dir: directory containing LCM log files.
+file_pattern: glob pattern for log files (default: *.00).
+channels: optional iterable of channel names to include. If None, includes all.
+out_path: output path.
+lcm_packages: optional list of LCM packages to load.
+format: output format (currently supports "pickle" or "pkl").
+verbose: pass-through verbosity flag to the parser.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Path: path to the written output file.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If ``navlib`` cannot be imported.
+ValueError: If ``format`` is unsupported.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.lcm import lcmlog_to_pickle
+>>> out = lcmlog_to_pickle("lcmlogs", file_pattern="*.00", out_path="merged.pkl")
+>>> out.name
+'merged.pkl'
+\end{lstlisting}
+
+\subsubsection{Function \texttt{main}}
+CLI entrypoint for LCM log utilities.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.lcm import main
+main() -> int
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+int: exit code (0 for success).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.lcm import main
+>>> isinstance(main(), int)
+True
+\end{lstlisting}
+
+\subsubsection{Class \texttt{ChannelTimingStats}}
+Timestamp quality metrics for one LCM channel.
+
+\paragraph{Method \texttt{add\_event}}
+Update channel timing metrics with one event timestamp.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+add_event(self, timestamp_us: int, gap_warning_us: int) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+timestamp_us (int): event timestamp in microseconds.
+gap_warning_us (int): threshold above which a gap is flagged.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> stats = ChannelTimingStats()
+>>> stats.add_event(1_000_000, gap_warning_us=500_000)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{SyncAgeStats}}
+Simple sonar-vs-navigation timing age statistics in microseconds.
+
+\paragraph{Method \texttt{observe}}
+Update sync-age counters for one sonar event.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+observe(self, sonar_timestamp_us: int, last_gps_timestamp_us: int, last_rph_timestamp_us: int) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+sonar_timestamp_us (int): sonar event timestamp in microseconds.
+last_gps_timestamp_us (int): most recent GPS timestamp in microseconds.
+last_rph_timestamp_us (int): most recent RPH timestamp in microseconds.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> sync = SyncAgeStats()
+>>> sync.observe(10_000_000, last_gps_timestamp_us=9_500_000, last_rph_timestamp_us=9_700_000)
+\end{lstlisting}
+
+\subsubsection{Class \texttt{FileScanStats}}
+Per-file counters and timestamp range.
+
+No public methods were found.
+
+\subsubsection{Class \texttt{LCMScanStats}}
+Aggregate scan output for one or more LCM logs.
+
+No public methods were found.
+
+\subsection{Module \texttt{mc\_io\_utils.runtime}}
+Runtime utilities for console, logging, and LCM log progress estimation.
+
+Functions:
+- clear\_console()
+- setup\_logging\_from\_yaml(cfg\_path, logs\_dir="logs", prefix="compas\_run")
+- check\_output\_file(output\_path, remove\_existing=True)
+- sum\_total\_bytes(file\_path)
+- estimate\_total\_bytes(file\_path, sample\_events=20000)
+
+\subsubsection{Function \texttt{clear\_console}}
+Clear the current terminal screen.
+
+The command used depends on the host OS:
+``cls`` on Windows and ``clear`` on Unix-like systems.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.runtime import clear_console
+clear_console() -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.runtime import clear_console
+>>> clear_console()
+\end{lstlisting}
+
+\subsubsection{Function \texttt{setup\_logging\_from\_yaml}}
+Configure Python logging from a YAML config file.
+
+Any handler named ``file`` or ``json\_file`` that contains a ``filename``
+entry is rewritten to include a timestamped basename under ``logs\_dir``.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.runtime import setup_logging_from_yaml
+setup_logging_from_yaml(
+    cfg_path: str | PathLike[str],
+    logs_dir: str | PathLike[str] = "logs",
+    prefix: str = "compas_run",
+) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+cfg_path (str | PathLike[str]): path to a YAML logging configuration file.
+logs_dir (str | PathLike[str]): directory where timestamped log files are created.
+prefix (str): prefix used for generated log filenames.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+RuntimeError: If ``PyYAML`` is not available.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.runtime import setup_logging_from_yaml
+>>> setup_logging_from_yaml("logging.yaml", logs_dir="logs", prefix="run")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{check\_output\_file}}
+Validate an output path by creating/truncating the file.
+
+This helper ensures the parent directory exists, optionally removes an
+existing file, and verifies write permission with a short open/close cycle.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.runtime import check_output_file
+check_output_file(output_path: Path, *, remove_existing: bool = True) -> bool
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+output_path (Path): destination path to validate.
+remove_existing (bool): when ``True``, remove an existing file before validating.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+bool: ``True`` if the output file can be created/written, ``False`` otherwise.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from pathlib import Path
+>>> from mc_io_utils.runtime import check_output_file
+>>> ok = check_output_file(Path("out/data.pkl"))
+>>> isinstance(ok, bool)
+True
+\end{lstlisting}
+
+\subsubsection{Function \texttt{sum\_total\_bytes}}
+Return exact payload bytes by scanning every event in an LCM log.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.runtime import sum_total_bytes
+sum_total_bytes(file_path: str | Path) -> Optional[int]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (str | Path): path to an LCM log file.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Optional[int]: exact sum of ``len(event.data)`` across all events, or
+``None`` if scanning fails (for example missing LCM bindings).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.runtime import sum_total_bytes
+>>> total = sum_total_bytes("session.00")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{estimate\_total\_bytes}}
+Estimate total payload bytes from an initial sample of events.
+
+The estimator reads up to ``sample\_events`` events, computes average payload
+size, approximates event count from on-disk file size, and returns an
+estimated total payload size. Falls back to coarse file-size heuristics if
+parsing is unavailable.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_io_utils.runtime import estimate_total_bytes
+estimate_total_bytes(file_path: str | Path, sample_events: int = 20000) -> Optional[int]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+file_path (str | Path): path to an LCM log file.
+sample_events (int): maximum number of events used for sampling.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Optional[int]: estimated payload bytes, or ``None`` when estimation fails.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_io_utils.runtime import estimate_total_bytes
+>>> estimate_total_bytes("session.00", sample_events=5000)
+\end{lstlisting}
+
+
+\section{Package \texttt{mc\_libs\_index}}
+\subsection{Module \texttt{mc\_libs\_index}}
+Index of mc\_* libraries and their functions.
+
+Exports:
+- list\_libraries() -> str (tree)
+- list\_functions(library) -> str (tree)
+- list\_examples(library)
+- list\_all() -> str (tree)
+- list\_all\_auto(base\_path=None)
+- discover\_libraries(base\_path=None)
+- get\_help(func\_path)
+- get\_example(func\_path)
+- tree(libraries=None)
+- print\_tree(libraries=None)
+- list\_cli\_commands()
+
+\subsubsection{Function \texttt{list\_cli\_commands}}
+Return a tree-like list of CLI commands, usage, and targets.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index import list_cli_commands
+list_cli_commands() -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: tree-style list of CLI commands.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index import list_cli_commands
+>>> print(list_cli_commands())
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_libs\_index.index}}
+Index of mc\_* libraries, functions, and examples.
+
+\subsubsection{Function \texttt{discover\_libraries}}
+Discover mc\_* libraries in a given path (defaults to project root).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import discover_libraries
+discover_libraries(base_path: str | Path | None = None) -> List[str]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+base_path (str | Path | None): base directory to scan (defaults to project root).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+List[str]: sorted list of discovered package names.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import discover_libraries
+>>> libs = discover_libraries()
+\end{lstlisting}
+
+\subsubsection{Function \texttt{build\_registry}}
+Build a registry by introspecting mc\_* libraries.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import build_registry
+build_registry(base_path: str | Path | None = None) -> Dict[str, List[dict]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+base_path (str | Path | None): base directory to scan (defaults to project root).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, List[dict]]: mapping from library name to entries with ``name`` and ``example``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import build_registry
+>>> registry = build_registry()
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_libraries}}
+Return a tree-like string of discovered mc\_* libraries.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import list_libraries
+list_libraries() -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: tree-style list of library names.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import list_libraries
+>>> print(list_libraries())
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_functions}}
+Return a tree-like string of functions for a library.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import list_functions
+list_functions(library: str) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+library (str): library name, e.g. ``"mc_data_utils"``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: tree-style list of functions for the library.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+KeyError: If the library is unknown.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import list_functions
+>>> print(list_functions("mc_data_utils"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_examples}}
+Return example calls for a library.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import list_examples
+list_examples(library: str) -> Dict[str, str]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+library (str): library name, e.g. ``"mc_data_utils"``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, str]: mapping from fully qualified names to example strings.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+KeyError: If the library is unknown.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import list_examples
+>>> examples = list_examples("mc_data_utils")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_all}}
+Return the auto-discovered registry as a tree-like string.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import list_all
+list_all() -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: tree-style list of all libraries and functions.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import list_all
+>>> print(list_all())
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_all\_auto}}
+Return an auto-discovered registry by introspection.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import list_all_auto
+list_all_auto(base_path: str | Path | None = None) -> Dict[str, List[dict]]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+base_path (str | Path | None): base directory to scan (defaults to project root).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, List[dict]]: registry mapping for all libraries.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import list_all_auto
+>>> registry = list_all_auto()
+\end{lstlisting}
+
+\subsubsection{Function \texttt{get\_help}}
+Return the docstring for a fully qualified function/class path.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import get_help
+get_help(func_path: str) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+func_path (str): fully qualified name, e.g. ``"mc_data_utils.allan2"``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: docstring text (or a fallback message).
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``func_path`` is not fully qualified.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import get_help
+>>> print(get_help("mc_data_utils.allan2"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{get\_example}}
+Return the example block for a fully qualified function/class path.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import get_example
+get_example(func_path: str) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+func_path (str): fully qualified name, e.g. ``"mc_data_utils.allan2"``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: example text if available, else a fallback message.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import get_example
+>>> print(get_example("mc_data_utils.allan2"))
+\end{lstlisting}
+
+\subsubsection{Function \texttt{tree}}
+Return a tree-like string grouped by library and module.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import tree
+tree(libraries: Dict[str, List[dict]] | None = None) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+libraries (Dict[str, List[dict]] | None): optional registry; when None, build one.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: tree-style summary of libraries and functions.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import tree
+>>> print(tree())
+\end{lstlisting}
+
+\subsubsection{Function \texttt{print\_tree}}
+Print a tree-like list of libraries and function names.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import print_tree
+print_tree(libraries: Dict[str, List[dict]] | None = None) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+libraries (Dict[str, List[dict]] | None): optional registry; when None, build one.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import print_tree
+>>> print_tree()
+\end{lstlisting}
+
+\subsubsection{Function \texttt{list\_cli\_commands}}
+Return a tree-like list of mc-libs CLI commands, usage, and targets.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_libs_index.index import list_cli_commands
+list_cli_commands() -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: tree-style list of CLI commands.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_libs_index.index import list_cli_commands
+>>> print(list_cli_commands())
+\end{lstlisting}
+
+
+\section{Package \texttt{mc\_reporting\_utils}}
+\subsection{Module \texttt{mc\_reporting\_utils}}
+Human-facing reporting and formatting helpers.
+
+No public functions or classes were found in this module.
+
+\subsection{Module \texttt{mc\_reporting\_utils.formatting}}
+Formatting utilities for human-readable reporting.
+
+\subsubsection{Function \texttt{format\_bytes\_human}}
+Format a byte count into a human-readable binary unit string.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_reporting_utils.formatting import format_bytes_human
+format_bytes_human(num_bytes: int | float, precision: int = 2) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+num_bytes (int | float): Size in bytes.
+precision (int): Number of decimal places for non-byte units.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: Human-readable size, e.g. ``"254.24 MB"``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> format_bytes_human(512)
+'512 B'
+>>> format_bytes_human(266591626)
+'254.24 MB'
+\end{lstlisting}
+
+\subsubsection{Function \texttt{format\_timestamp\_utc\_us}}
+Format a Unix timestamp in microseconds as UTC text.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_reporting_utils.formatting import format_timestamp_utc_us
+format_timestamp_utc_us(timestamp_us: int | float | None) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+timestamp_us (int | float | None): Unix timestamp in microseconds.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: formatted UTC string (``YYYY-mm-dd HH:MM:SS.ffffff UTC``) or
+``"n/a"`` for invalid or non-positive values.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> format_timestamp_utc_us(1_700_000_000_000_000)
+'2023-11-14 22:13:20.000000 UTC'
+\end{lstlisting}
+
+\subsubsection{Function \texttt{format\_duration\_us}}
+Format a duration in microseconds as seconds text.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_reporting_utils.formatting import format_duration_us
+format_duration_us(duration_us: int | float | None, precision: int = 3) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+duration_us (int | float | None): duration in microseconds.
+precision (int): number of decimal places in seconds.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: duration string in seconds (for example ``"0.125s"``). Returns
+``"0.000s"`` for invalid or non-positive values.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> format_duration_us(125_000)
+'0.125s'
+\end{lstlisting}
+
+\subsubsection{Function \texttt{format\_mean\_ms}}
+Compute and format a mean duration in milliseconds.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_reporting_utils.formatting import format_mean_ms
+format_mean_ms(total_us: int | float, samples: int) -> str
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+total_us (int | float): accumulated duration in microseconds.
+samples (int): number of samples in the accumulation.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+str: mean duration formatted in milliseconds (for example ``"3.4 ms"``),
+or ``"n/a"`` when ``samples <= 0`` or ``total_us`` is invalid.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> format_mean_ms(12_500, 5)
+'2.5 ms'
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_reporting\_utils.terminal}}
+Terminal interaction helpers for human-facing reporting.
+
+\subsubsection{Class \texttt{Spinner}}
+Minimal terminal spinner for long-running operations.
+
+The spinner animates only when the output stream is a TTY. In non-interactive
+runs it falls back to simple start/done text output.
+
+\paragraph{Method \texttt{start}}
+Start spinner animation and return the spinner instance.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+start(self) -> "Spinner"
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Spinner: the same spinner object (useful for chaining/context use).
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_reporting_utils.terminal import Spinner
+>>> sp = Spinner("Loading").start()
+>>> sp.stop("Done")
+\end{lstlisting}
+
+\paragraph{Method \texttt{stop}}
+Stop spinner animation and optionally print a final message.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+stop(self, done_message: str | None = None) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+done_message (str | None): message to print after stopping. If
+``None``, uses the instance default ``done_message``.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_reporting_utils.terminal import Spinner
+>>> sp = Spinner("Working", done_message="Finished").start()
+>>> sp.stop()
+\end{lstlisting}
+
+
+\section{Package \texttt{mc\_robo\_utils}}
+\subsection{Module \texttt{mc\_robo\_utils}}
+Utility helpers for robotics workflows.
+
+Exports:
+- quat\_to\_rpy
+- KinematicsData, KinematicFrame, KinematicComponent, build\_component, default\_units
+- McKinematicsData, McKinematicFrame, McKinematicComponent (aliases)
+- plot\_component, plot\_multiple, save\_html
+
+No public functions or classes were found in this module.
+
+\subsection{Module \texttt{mc\_robo\_utils.kinematics}}
+Kinematics data structures for robotics workflows.
+
+Classes:
+- KinematicComponent
+- KinematicFrame
+- KinematicsData
+- McKinematicComponent (alias)
+- McKinematicFrame (alias)
+- McKinematicsData (alias)
+
+Functions:
+- build\_component(...)
+- default\_units()
+
+\subsubsection{Function \texttt{build\_component}}
+Convenience constructor for ``KinematicComponent``.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.kinematics import build_component
+build_component(
+    x: Optional[np.ndarray] = None,
+    y: Optional[np.ndarray] = None,
+    z: Optional[np.ndarray] = None,
+    psi: Optional[np.ndarray] = None,
+    theta: Optional[np.ndarray] = None,
+    phi: Optional[np.ndarray] = None,
+) -> KinematicComponent
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+x (Optional[np.ndarray]): x samples.
+y (Optional[np.ndarray]): y samples.
+z (Optional[np.ndarray]): z samples.
+psi (Optional[np.ndarray]): yaw samples.
+theta (Optional[np.ndarray]): pitch samples.
+phi (Optional[np.ndarray]): roll samples.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+KinematicComponent: populated component container.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.kinematics import build_component
+>>> comp = build_component(x=[0.0, 1.0], y=[0.0, 2.0])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{default\_units}}
+Default units for common kinematics fields.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.kinematics import default_units
+default_units() -> Dict[str, str]
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Dict[str, str]: mapping of kinematics field names to unit strings.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.kinematics import default_units
+>>> units = default_units()
+>>> units["pos.x"]
+'m'
+\end{lstlisting}
+
+\subsubsection{Class \texttt{KinematicComponent}}
+Container for x,y,z and optional attitude angles psi, theta, phi.
+
+\paragraph{Method \texttt{as\_dict}}
+Return the component fields as a dictionary.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+as_dict(self) -> dict
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+dict: mapping with keys ``x``, ``y``, ``z``, ``psi``, ``theta``, ``phi``.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.kinematics import KinematicComponent
+>>> comp = KinematicComponent(x=[0.0, 1.0], y=[2.0, 3.0])
+>>> comp.as_dict()["x"]
+[0.0, 1.0]
+\end{lstlisting}
+
+\subsubsection{Class \texttt{KinematicFrame}}
+Container for pos, vel, acc groups in a frame (e.g., NED or body).
+
+No public methods were found.
+
+\subsubsection{Class \texttt{KinematicsData}}
+Standard kinematics structure shared across projects.
+
+\paragraph{Method \texttt{copy}}
+Return a shallow copy of the kinematics data.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+copy(self) -> "KinematicsData"
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+KinematicsData: new instance with copied time arrays and same frame objects.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_robo_utils.kinematics import KinematicsData
+>>> data = KinematicsData(t_s=np.array([0.0, 1.0]))
+>>> data_copy = data.copy()
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_robo\_utils.plotting}}
+Plotting helpers for kinematics data using Plotly.
+
+Functions:
+- plot\_component(...)
+- plot\_multiple(...)
+- plot\_series(x, y, title=None, x\_label="time", y\_label=None, height=400)
+- plot\_multi\_series(series, title=None)
+- plot\_allan(T\_g, sigma\_g, T\_a, sigma\_a, labels=None, colors=None)
+- save\_html(fig, path, open\_after=False)
+
+\subsubsection{Function \texttt{plot\_component}}
+Plot a single component (pos/vel/acc) from a frame.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting import plot_component
+plot_component(
+    data: McKinematicsData,
+    frame: str = "ned",
+    group: str = "pos",
+    fields: Optional[Iterable[str]] = None,
+    separate_axes: bool = True,
+    title: Optional[str] = None,
+) -> go.Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+data (McKinematicsData): kinematics data structure.
+frame (str): frame name (``"ned"`` or ``"body"``).
+group (str): component group (``"pos"``, ``"vel"``, or ``"acc"``).
+fields (Optional[Iterable[str]]): subset of ``[x, y, z, psi, theta, phi]`` to plot.
+separate_axes (bool): when True, one subplot per field.
+title (Optional[str]): optional figure title.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+go.Figure: Plotly figure containing the plot(s).
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the frame/group is invalid or no fields are available.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting import plot_component
+>>> fig = plot_component(data, frame="body", group="acc", fields=["x", "y", "z"])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_multiple}}
+Plot multiple components in a single figure.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting import plot_multiple
+plot_multiple(
+    data: McKinematicsData,
+    specs: Iterable[tuple[str, str, Iterable[str]]],
+    separate_axes: bool = True,
+    title: Optional[str] = None,
+) -> go.Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+data (McKinematicsData): kinematics data structure.
+specs (Iterable[tuple[str, str, Iterable[str]]]): list of (frame, group, fields).
+separate_axes (bool): when True, one subplot per field.
+title (Optional[str]): optional figure title.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+go.Figure: Plotly figure containing the plot(s).
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``specs`` is empty.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting import plot_multiple
+>>> fig = plot_multiple(data, specs=[("body", "vel", ["x", "y", "z"])])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_series}}
+Plot a single series (x vs y).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting import plot_series
+plot_series(
+    x: Sequence | np.ndarray,
+    y: Sequence | np.ndarray,
+    *,
+    title: str | None = None,
+    x_label: str = "time",
+    y_label: str | None = None,
+    height: int = 400,
+) -> go.Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+x (Sequence | np.ndarray): x values.
+y (Sequence | np.ndarray): y values.
+title (str | None): optional title.
+x_label (str): x-axis label.
+y_label (str | None): y-axis label.
+height (int): figure height in pixels.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+go.Figure: Plotly figure containing the series.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting import plot_series
+>>> fig = plot_series([0, 1, 2], [0, 1, 0], title="demo")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_multi\_series}}
+Plot multiple labeled series as stacked Plotly subplots.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting import plot_multi_series
+plot_multi_series(
+    series: Iterable[tuple[Sequence[Any], ArrayLike, str, str | None]],
+    *,
+    title: str | None = None,
+    height_per: int = 250,
+) -> go.Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+series (Iterable[tuple[Sequence[Any], ArrayLike, str, str | None]]):
+    iterable of ``(x, y, label, y_label)`` tuples.
+title (str | None): optional figure title.
+height_per (int): height in pixels allocated per subplot.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+go.Figure: Plotly figure containing one subplot per provided series.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``series`` is empty.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting import plot_multi_series
+>>> fig = plot_multi_series([
+...     ([0, 1, 2], [0.0, 1.0, 0.0], "signal_a", "amp"),
+...     ([0, 1, 2], [2.0, 2.5, 2.3], "signal_b", "deg"),
+... ])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_allan}}
+Plot gyro/accel Allan deviation with default markers/labels.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting import plot_allan
+plot_allan(
+    T_g: np.ndarray,
+    sigma_g: np.ndarray,
+    T_a: np.ndarray,
+    sigma_a: np.ndarray,
+    *,
+    labels: Optional[Iterable[str]] = None,
+    colors: Optional[Iterable[str]] = None,
+    title: str = "Allan Deviation",
+) -> go.Figure
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+T_g (np.ndarray): gyro tau array.
+sigma_g (np.ndarray): gyro Allan deviation array (K x 3).
+T_a (np.ndarray): accel tau array.
+sigma_a (np.ndarray): accel Allan deviation array (K x 3).
+labels (Optional[Iterable[str]]): axis labels (default ``["X", "Y", "Z"]``).
+colors (Optional[Iterable[str]]): trace colors.
+title (str): figure title.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+go.Figure: Plotly figure with two stacked log-log plots.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_robo_utils.plotting import plot_allan
+>>> T = np.logspace(0, 3, 10)
+>>> sigma = np.random.rand(10, 3)
+>>> fig = plot_allan(T, sigma, T, sigma)
+\end{lstlisting}
+
+\subsubsection{Function \texttt{save\_html}}
+Save a Plotly figure to HTML, optionally opening it.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting import save_html
+save_html(fig: go.Figure, path: str, open_after: bool = False) -> None
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+fig (go.Figure): Plotly figure to save.
+path (str): destination HTML path.
+open_after (bool): when True, open the file after writing.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+None
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting import plot_series, save_html
+>>> fig = plot_series([0, 1], [0, 1])
+>>> save_html(fig, "plot.html", open_after=False)
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_robo\_utils.plotting\_print}}
+Matplotlib plotting helpers for kinematics and diagnostics (print/static).
+
+Functions:
+- plot\_multiple\_mpl(data, specs, t\_dt=None, title=None)
+- plot\_series\_mpl(x, y, title=None, x\_label=None, y\_label=None)
+- plot\_multi\_series\_mpl(series, title=None, x\_label="time")
+- plot\_allan\_mpl(T\_g, sigma\_g, T\_a, sigma\_a)
+
+\subsubsection{Function \texttt{plot\_multiple\_mpl}}
+Plot multiple components using Matplotlib (one subplot per field).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting_print import plot_multiple_mpl
+plot_multiple_mpl(
+    data: McKinematicsData,
+    specs: Iterable[tuple[str, str, Iterable[str]]],
+    *,
+    t_dt: Optional[Sequence] = None,
+    title: Optional[str] = None,
+)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+data (McKinematicsData): kinematics data to plot.
+specs (Iterable[tuple[str, str, Iterable[str]]]): list of (frame, group, fields).
+t_dt (Optional[Sequence]): optional datetime array for the x-axis.
+title (Optional[str]): optional figure title.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+matplotlib.figure.Figure: Matplotlib figure containing the plots.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``specs`` is empty.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting_print import plot_multiple_mpl
+>>> fig = plot_multiple_mpl(data, specs=[("body", "vel", ["x", "y"])])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_series\_mpl}}
+Plot a single series using Matplotlib.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting_print import plot_series_mpl
+plot_series_mpl(x, y, *, title=None, x_label=None, y_label=None)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+x: x-axis values.
+y: y-axis values.
+title: optional title.
+x_label: optional x-axis label.
+y_label: optional y-axis label.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+matplotlib.figure.Figure: Matplotlib figure containing the series.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting_print import plot_series_mpl
+>>> fig = plot_series_mpl([0, 1], [0, 1], title="demo")
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_multi\_series\_mpl}}
+Plot multiple labeled series as stacked Matplotlib subplots.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting_print import plot_multi_series_mpl
+plot_multi_series_mpl(series, *, title=None, x_label="time")
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+series: iterable of ``(x, y, label, y_label)`` tuples.
+title: optional figure title.
+x_label: x-axis label for the bottom subplot.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+matplotlib.figure.Figure: Matplotlib figure containing one subplot per
+input series.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If ``series`` is empty.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> from mc_robo_utils.plotting_print import plot_multi_series_mpl
+>>> fig = plot_multi_series_mpl([
+...     ([0, 1], [0.0, 1.0], "speed", "m/s"),
+...     ([0, 1], [1.0, 1.5], "yaw", "deg"),
+... ])
+\end{lstlisting}
+
+\subsubsection{Function \texttt{plot\_allan\_mpl}}
+Plot gyro/accel Allan deviation using Matplotlib.
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.plotting_print import plot_allan_mpl
+plot_allan_mpl(T_g: np.ndarray, sigma_g: np.ndarray, T_a: np.ndarray, sigma_a: np.ndarray)
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+T_g (np.ndarray): gyro tau array.
+sigma_g (np.ndarray): gyro Allan deviation array (K x 3).
+T_a (np.ndarray): accel tau array.
+sigma_a (np.ndarray): accel Allan deviation array (K x 3).
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+matplotlib.figure.Figure: Matplotlib figure containing the Allan plots.
+\end{lstlisting}
+\paragraph{Raises}
+Not specified.
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_robo_utils.plotting_print import plot_allan_mpl
+>>> T = np.logspace(0, 3, 10)
+>>> sigma = np.random.rand(10, 3)
+>>> fig = plot_allan_mpl(T, sigma, T, sigma)
+\end{lstlisting}
+
+\subsection{Module \texttt{mc\_robo\_utils.transformations}}
+Common robotics transformations.
+
+Functions:
+- quat\_to\_rpy(quat\_xyzw)
+
+\subsubsection{Function \texttt{quat\_to\_rpy}}
+Convert quaternion(s) (x, y, z, w) to roll/pitch/yaw (rad).
+
+\paragraph{Syntax}
+\begin{lstlisting}[language=Python]
+from mc_robo_utils.transformations import quat_to_rpy
+quat_to_rpy(quat_xyzw: np.ndarray) -> np.ndarray
+\end{lstlisting}
+\paragraph{Inputs}
+\begin{lstlisting}[language=Python]
+quat_xyzw: Array of shape (N, 4) or (4,) in x,y,z,w order.
+\end{lstlisting}
+\paragraph{Outputs}
+\begin{lstlisting}[language=Python]
+Array of shape (N, 3) with roll, pitch, yaw in radians.
+\end{lstlisting}
+\paragraph{Raises}
+\begin{lstlisting}[language=Python]
+ValueError: If the input array does not have shape ``(4,)`` or ``(N, 4)``.
+\end{lstlisting}
+\paragraph{Example}
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+>>> from mc_robo_utils.transformations import quat_to_rpy
+>>> quat_to_rpy(np.array([0.0, 0.0, 0.0, 1.0]))
+\end{lstlisting}
+
+\end{document}

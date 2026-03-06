@@ -3,6 +3,7 @@
 Functions:
 - plot_multiple_mpl(data, specs, t_dt=None, title=None)
 - plot_series_mpl(x, y, title=None, x_label=None, y_label=None)
+- plot_multi_series_mpl(series, title=None, x_label="time")
 - plot_allan_mpl(T_g, sigma_g, T_a, sigma_a)
 
 Example:
@@ -97,6 +98,11 @@ def plot_multiple_mpl(
             axes[row].set_ylabel(_ylabel_for(group, f, data.units))
             row += 1
 
+    for ax in axes:
+        ax.margins(x=0)
+    if len(t) > 1 and t[0] != t[-1]:
+        axes[-1].set_xlim(t[0], t[-1])
+
     if hasattr(axes[-1].xaxis, "set_major_formatter") and t_dt is not None:
         axes[-1].xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
     axes[-1].set_xlabel("time")
@@ -133,6 +139,54 @@ def plot_series_mpl(x, y, *, title=None, x_label=None, y_label=None):
     if y_label:
         ax.set_ylabel(y_label)
     ax.grid(True)
+    ax.margins(x=0)
+    if len(x) > 1 and x[0] != x[-1]:
+        ax.set_xlim(x[0], x[-1])
+    fig.tight_layout()
+    return fig
+
+
+def plot_multi_series_mpl(series, *, title=None, x_label="time"):
+    """Plot multiple labeled series as stacked Matplotlib subplots.
+
+    Args:
+        series: iterable of ``(x, y, label, y_label)`` tuples.
+        title: optional figure title.
+        x_label: x-axis label for the bottom subplot.
+
+    Returns:
+        matplotlib.figure.Figure: Matplotlib figure containing one subplot per
+        input series.
+
+    Raises:
+        ValueError: If ``series`` is empty.
+
+    Examples:
+        >>> from mc_robo_utils.plotting_print import plot_multi_series_mpl
+        >>> fig = plot_multi_series_mpl([
+        ...     ([0, 1], [0.0, 1.0], "speed", "m/s"),
+        ...     ([0, 1], [1.0, 1.5], "yaw", "deg"),
+        ... ])
+    """
+    series = list(series)
+    if not series:
+        raise ValueError("series must not be empty")
+    fig, axes = plt.subplots(len(series), 1, figsize=(14, max(4, 2 * len(series))), sharex=True)
+    if len(series) == 1:
+        axes = [axes]
+
+    for idx, (x, y, label, y_label) in enumerate(series):
+        axes[idx].plot(x, y)
+        axes[idx].set_title(label)
+        if y_label:
+            axes[idx].set_ylabel(y_label)
+        axes[idx].margins(x=0)
+    x0 = series[0][0]
+    if len(x0) > 1 and x0[0] != x0[-1]:
+        axes[-1].set_xlim(x0[0], x0[-1])
+    axes[-1].set_xlabel(x_label)
+    if title:
+        fig.suptitle(title)
     fig.tight_layout()
     return fig
 
